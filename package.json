@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "build": "npm run sync-pages",
     "dev": "node scripts/dev-server.js",
     "sync-pages": "node scripts/generate-directory.js"
   }
