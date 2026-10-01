@@ -1,0 +1,11 @@
+{
+  "members": [
+    "pages/miembros/Katheryne-Lara.html",
+    "pages/miembros/Hector-Sagova.html",
+    "pages/miembros/Victor-Calix.html"
+  ],
+  "businesses": [
+    "pages/negocios/cafe-aurora.html",
+    "pages/negocios/studio-verde.html"
+  ]
+}
