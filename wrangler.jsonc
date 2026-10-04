@@ -1,5 +1,9 @@
 {
   "name": "prompt-to-prosperity",
+  "compatibility_date": "2026-10-04",
+  "assets": {
+    "directory": "."
+  },
   "observability": {
     "logs": {
       "enabled": true,
