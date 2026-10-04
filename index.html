@@ -19,11 +19,13 @@
         <img class="header-flag" src="assets/Logos/Flag-header.png" alt="Bandera de Estados Unidos">
         <img class="header-seal" src="assets/Logos/Embassy-header-small.png" alt="Embajada de Estados Unidos">
         <img class="header-alumni" src="assets/Logos/Alumni-header-small.png" alt="Exchange Alumni">
+        <img class="header-freedom" src="assets/Logos/Freedom%20250.png" alt="Freedom 250">
       </div>
     </div>
 
     <nav class="site-nav" aria-label="Navegación principal">
       <a href="#sobre">Sobre el programa</a>
+      <a href="#programa">Programa</a>
       <a href="#comunidad">Comunidad</a>
     </nav>
   </header>
@@ -48,7 +50,7 @@
         </div>
         <div class="visual-card main">
           <span>Programa</span>
-          <strong>Formación gratuita + acompañamiento</strong>
+          <strong>10 meses de formación + acompañamiento</strong>
         </div>
         <div class="visual-stack">
           <div class="visual-card">
@@ -86,9 +88,9 @@
         <article>
           <h3>Qué hacemos</h3>
           <p>
-            Facilitamos mentorías, talleres, recursos y acompañamiento para
-            aplicar IA en marketing, productividad, análisis de datos,
-            operaciones y decisiones del negocio, con apoyo de expertos.
+            Facilitamos talleres especializados, mentorías, recursos y
+            acompañamiento para aplicar IA en marketing, productividad,
+            análisis de datos, operaciones y decisiones del negocio.
           </p>
         </article>
         <article>
@@ -110,6 +112,94 @@
       </div>
     </section>
 
+    <section id="programa" class="section program-section">
+      <div class="section-heading">
+        <h2>Un programa diseñado para aplicar IA en negocios reales</h2>
+      </div>
+
+      <div class="program-layout">
+        <div class="program-summary">
+          <p>
+            Durante 10 meses, los participantes seleccionados acceden a
+            formación práctica en inteligencia artificial, herramientas
+            digitales, mentorías, expertos nacionales e internacionales y una
+            comunidad de emprendedores con ganas de crecer, innovar y generar
+            impacto.
+          </p>
+        </div>
+
+        <div class="program-stats" aria-label="Formato del programa">
+          <article>
+            <strong>10 meses</strong>
+            <span>de duración</span>
+          </article>
+          <article>
+            <strong>3</strong>
+            <span>encuentros presenciales</span>
+          </article>
+          <article>
+            <strong>17</strong>
+            <span>sesiones virtuales</span>
+          </article>
+        </div>
+
+        <div class="curriculum-grid" aria-label="Currículo de aprendizaje">
+          <article>
+            <span>01</span>
+            <h3>AI Foundations</h3>
+            <p>Introducción a la IA y oportunidades para emprendedores.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Prompt Engineering</h3>
+            <p>Cómo obtener mejores resultados de herramientas de IA.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Marketing & Personal Brand</h3>
+            <p>Contenido digital, datos de clientes y mejor posicionamiento.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Productivity & Operations</h3>
+            <p>Automatización y optimización de procesos del negocio.</p>
+          </article>
+          <article>
+            <span>05</span>
+            <h3>Data & Decision Making</h3>
+            <p>Análisis de información para tomar mejores decisiones.</p>
+          </article>
+        </div>
+
+        <div class="program-columns">
+          <article>
+            <h3>Resultados esperados</h3>
+            <ul>
+              <li>Mayor productividad y procesos más eficientes.</li>
+              <li>Mejor presencia digital y atención al cliente.</li>
+              <li>Decisiones basadas en datos y materiales bilingües.</li>
+            </ul>
+          </article>
+          <article>
+            <h3>Elegibilidad y selección</h3>
+            <ul>
+              <li>Emprendimiento en operación, motivación y disponibilidad.</li>
+              <li>Inglés básico, computadora e internet estable.</li>
+              <li>Compromiso con el 90% de sesiones, actividades y trabajos.</li>
+            </ul>
+          </article>
+          <article>
+            <h3>Beneficios</h3>
+            <ul>
+              <li>Suscripción a Claude, mentorías 1 a 1 y talleres con expertos.</li>
+              <li>Recursos para productividad, operaciones, marketing, marca y datos.</li>
+              <li>Networking, visibilidad, espacios para presentar avances y certificado.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section id="comunidad" class="section community-section">
       <div class="section-heading">
         <div class="section-title-row community-title-row">
@@ -125,13 +215,28 @@
         </div>
       </div>
 
+      <div class="business-filters" aria-label="Filtros de negocios">
+        <div class="filter-control">
+          <span id="generationFilterLabel">Generacion</span>
+          <button id="generationFilter" class="filter-trigger" type="button" data-value="" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="generationFilterLabel generationFilter">Todas</button>
+          <div id="generationFilterMenu" class="filter-menu" role="listbox" aria-labelledby="generationFilterLabel"></div>
+        </div>
+        <div class="filter-control">
+          <span id="categoryFilterLabel">Categoria</span>
+          <button id="categoryFilter" class="filter-trigger" type="button" data-value="" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="categoryFilterLabel categoryFilter">Todas</button>
+          <div id="categoryFilterMenu" class="filter-menu" role="listbox" aria-labelledby="categoryFilterLabel"></div>
+        </div>
+      </div>
+
       <div class="directory-layout">
         <section>
           <div class="directory-heading">
             <h3>Miembros</h3>
             <span id="memberCount">0</span>
           </div>
-          <div id="membersGrid" class="card-grid"></div>
+          <div class="directory-scroll member-scroll" aria-label="Listado de miembros">
+            <div id="membersGrid" class="card-grid"></div>
+          </div>
         </section>
 
         <section>
@@ -139,7 +244,9 @@
             <h3>Negocios</h3>
             <span id="businessCount">0</span>
           </div>
-          <div id="businessesGrid" class="card-grid"></div>
+          <div class="directory-scroll business-scroll" aria-label="Listado de negocios">
+            <div id="businessesGrid" class="card-grid"></div>
+          </div>
         </section>
       </div>
     </section>

@@ -174,3 +174,14 @@ instrucciones operativas independientes.
   Departamento de Estado de los Estados Unidos cuando corresponde.
 - [ ] En redes sociales, la pieza o el copy incluye `#ExchangeAlumni`, `#AEIF`
   y las cuentas relevantes.
+
+### Aplicacion actual en el encabezado web
+
+- El encabezado mantiene primero la marca del proyecto `Prompt to Prosperity`.
+- El bloque institucional conserva el orden requerido:
+  `Flag-header.png`, `Embassy-header-small.png`, `Alumni-header-small.png`.
+- `Freedom 250.png` se coloca despues de esas tres marcas como logo de socio,
+  sin anteponerse a la bandera ni competir con ella en prominencia.
+- `Freedom 250.png` se inserta como imagen completa con `object-fit: contain`,
+  sin recolorear, rotar, deformar, recortar, filtrar ni fusionar con otros
+  elementos.

@@ -25,6 +25,17 @@ Para agregar o cambiar perfiles, crea o renombra archivos `.html` dentro de:
 - `pages/miembros/` para miembros.
 - `pages/negocios/` para negocios.
 
+En perfiles de negocios puedes agregar estos metadatos dentro del `<head>` para
+activar los filtros del home:
+
+```html
+<meta name="p2p-generation" content="Generacion 1">
+<meta name="p2p-category" content="Alimentos y bebidas">
+```
+
+Si no se agregan, el negocio igual aparece; la categoria se toma del primer
+texto del perfil y la generacion queda como `Sin generacion`.
+
 Luego ejecuta:
 
 ```bash

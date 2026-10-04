@@ -68,7 +68,17 @@ const businessesGrid = document.querySelector("#businessesGrid");
 const sponsorsGrid = document.querySelector("#sponsorsGrid");
 const memberCount = document.querySelector("#memberCount");
 const businessCount = document.querySelector("#businessCount");
+const generationFilter = document.querySelector("#generationFilter");
+const categoryFilter = document.querySelector("#categoryFilter");
+const generationFilterMenu = document.querySelector("#generationFilterMenu");
+const categoryFilterMenu = document.querySelector("#categoryFilterMenu");
 const featuredVideoContainer = document.querySelector("#featuredVideo");
+const directoryScrollContainers = document.querySelectorAll(".directory-scroll");
+let allBusinesses = [];
+
+[generationFilterMenu, categoryFilterMenu].forEach((menu) => {
+  document.body.appendChild(menu);
+});
 
 function parseFaqMarkdown(markdown) {
   const sections = markdown.split(/^##\s+(.+)$/m).slice(1);
@@ -140,6 +150,8 @@ async function loadProfileCard(url) {
   const name = page.querySelector(".profile-copy h1")?.textContent.trim();
   const summary = page.querySelector(".profile-copy h1 + p")?.textContent.trim() || "";
   const initials = page.querySelector(".profile-photo")?.textContent.trim() || getInitials(name || "");
+  const generation = page.querySelector("meta[name='p2p-generation']")?.content.trim() || "Sin generacion";
+  const category = page.querySelector("meta[name='p2p-category']")?.content.trim();
   const [role, ...descriptionParts] = summary.split(". ");
 
   return {
@@ -147,7 +159,9 @@ async function loadProfileCard(url) {
     role: role || "Perfil",
     description: descriptionParts.join(". ") || summary || "Perfil disponible en la comunidad.",
     initials,
-    url
+    url,
+    generation,
+    category: category || role || "Sin categoria"
   };
 }
 
@@ -170,10 +184,112 @@ async function renderDirectory() {
     loadDirectoryItems(manifest.businesses || [])
   ]);
 
+  allBusinesses = businesses;
   renderCards(members, membersGrid);
-  renderCards(businesses, businessesGrid);
+  renderBusinessFilters(businesses);
+  renderFilteredBusinesses();
   memberCount.textContent = members.length;
-  businessCount.textContent = businesses.length;
+}
+
+function uniqueValues(items, key) {
+  return [...new Set(items.map((item) => item[key]).filter(Boolean))]
+    .sort((first, second) => first.localeCompare(second, "es", { sensitivity: "base" }));
+}
+
+function getFilterValue(trigger) {
+  return trigger.dataset.value || "";
+}
+
+function setFilterValue(trigger, value, label) {
+  trigger.dataset.value = value;
+  trigger.textContent = label;
+}
+
+function getFilterMenu(trigger) {
+  return document.querySelector(`#${trigger.id}Menu`);
+}
+
+function positionFilterMenu(trigger) {
+  const menu = getFilterMenu(trigger);
+  const rect = trigger.getBoundingClientRect();
+
+  menu.style.left = `${rect.left}px`;
+  menu.style.top = `${rect.bottom + 8}px`;
+  menu.style.width = `${rect.width}px`;
+}
+
+function openFilterMenu(trigger) {
+  const control = trigger.closest(".filter-control");
+  const menu = getFilterMenu(trigger);
+
+  positionFilterMenu(trigger);
+  control.classList.add("is-open");
+  menu.classList.add("is-open");
+  trigger.setAttribute("aria-expanded", "true");
+}
+
+function closeFilterMenus() {
+  document.querySelectorAll(".filter-control.is-open").forEach((control) => {
+    control.classList.remove("is-open");
+    control.querySelector(".filter-trigger")?.setAttribute("aria-expanded", "false");
+  });
+
+  document.querySelectorAll(".filter-menu.is-open").forEach((menu) => {
+    menu.classList.remove("is-open");
+  });
+}
+
+function renderFilterOptions(trigger, menu, values, selectedValue) {
+  menu.innerHTML = "";
+  const options = [{ value: "", label: "Todas" }, ...values.map((value) => ({ value, label: value }))];
+
+  options.forEach((option) => {
+    const button = document.createElement("button");
+    button.className = "filter-option";
+    button.type = "button";
+    button.textContent = option.label;
+    button.dataset.value = option.value;
+    button.setAttribute("role", "option");
+    button.setAttribute("aria-selected", String(option.value === selectedValue));
+
+    if (option.value === selectedValue) {
+      button.classList.add("is-selected");
+      setFilterValue(trigger, option.value, option.label);
+    }
+
+    button.addEventListener("click", () => {
+      setFilterValue(trigger, option.value, option.label);
+      closeFilterMenus();
+      renderFilteredBusinesses();
+    });
+
+    menu.appendChild(button);
+  });
+}
+
+function renderBusinessFilters(businesses) {
+  renderFilterOptions(generationFilter, generationFilterMenu, uniqueValues(businesses, "generation"), getFilterValue(generationFilter));
+  renderFilterOptions(categoryFilter, categoryFilterMenu, uniqueValues(businesses, "category"), getFilterValue(categoryFilter));
+}
+
+function renderFilteredBusinesses() {
+  const generation = getFilterValue(generationFilter);
+  const category = getFilterValue(categoryFilter);
+  const filteredBusinesses = allBusinesses.filter((business) => {
+    const matchesGeneration = !generation || business.generation === generation;
+    const matchesCategory = !category || business.category === category;
+    return matchesGeneration && matchesCategory;
+  });
+
+  renderCards(filteredBusinesses, businessesGrid);
+  businessCount.textContent = filteredBusinesses.length;
+  updateDirectoryScrollStates();
+}
+
+function updateDirectoryScrollStates() {
+  directoryScrollContainers.forEach((container) => {
+    container.classList.toggle("is-scrolled", container.scrollTop > 4);
+  });
 }
 
 function renderFeaturedVideo() {
@@ -401,9 +517,43 @@ chatInput.addEventListener("input", () => {
   renderQuestionBank(chatInput.value);
 });
 
+directoryScrollContainers.forEach((container) => {
+  container.addEventListener("scroll", () => updateDirectoryScrollStates(), { passive: true });
+});
+
+[generationFilter, categoryFilter].forEach((trigger) => {
+  trigger.addEventListener("click", () => {
+    const control = trigger.closest(".filter-control");
+    const isOpen = control.classList.contains("is-open");
+
+    closeFilterMenus();
+
+    if (!isOpen) {
+      openFilterMenu(trigger);
+    }
+  });
+
+  trigger.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeFilterMenus();
+      trigger.focus();
+    }
+  });
+});
+
+document.addEventListener("click", (event) => {
+  if (!event.target.closest(".filter-control") && !event.target.closest(".filter-menu")) {
+    closeFilterMenus();
+  }
+});
+
+window.addEventListener("resize", closeFilterMenus);
+window.addEventListener("scroll", closeFilterMenus, true);
+
 renderSponsors();
 renderFeaturedVideo();
 renderDirectory();
+updateDirectoryScrollStates();
 
 addMessage("Hola. Soy el asistente de Prompt to Prosperity. Elige una pregunta frecuente o escribe tu duda.");
 loadFaqItems();
