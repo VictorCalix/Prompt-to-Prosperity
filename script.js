@@ -1,3 +1,4 @@
+const linkpostulacion = "";
 let faqItems = [];
 
 // Escribe aquí el nombre de un archivo ubicado en assets/videos/ para mostrarlo.
@@ -7,6 +8,7 @@ const featuredVideo = {
 };
 
 const directoryManifestUrl = "pages/directory.json";
+const businessRibbonManifestUrl = "assets/Negocios%20Cinta/manifest.json";
 
 const legacyMembers = [
   {
@@ -50,7 +52,7 @@ const fallbackDirectory = {
 // Agrega aliados estratégicos con { name, logo, url }. Ejemplo de logo: "assets/aliados/marca.png".
 const sponsors = [
   {
-    name: "Banco Atlantida",
+    name: "Banco Atlántida",
     logo: "",
     url: "https://bancatlan.hn/"
   }
@@ -73,11 +75,16 @@ const categoryFilter = document.querySelector("#categoryFilter");
 const generationFilterMenu = document.querySelector("#generationFilterMenu");
 const categoryFilterMenu = document.querySelector("#categoryFilterMenu");
 const featuredVideoContainer = document.querySelector("#featuredVideo");
+const businessRibbonTrack = document.querySelector("#businessRibbonTrack");
 const directoryScrollContainers = document.querySelectorAll(".directory-scroll");
+const postulationLinks = document.querySelectorAll("[data-postulation-link]");
 let allBusinesses = [];
+const ribbonImageCache = new Map();
 
 [generationFilterMenu, categoryFilterMenu].forEach((menu) => {
-  document.body.appendChild(menu);
+  if (menu) {
+    document.body.appendChild(menu);
+  }
 });
 
 function parseFaqMarkdown(markdown) {
@@ -107,6 +114,20 @@ function parseFaqMarkdown(markdown) {
   }
 
   return items;
+}
+
+function configurePostulationLinks() {
+  const targetUrl = linkpostulacion.trim();
+
+  postulationLinks.forEach((link) => {
+    if (!targetUrl) {
+      return;
+    }
+
+    link.href = targetUrl;
+    link.target = "_blank";
+    link.rel = "noopener";
+  });
 }
 
 async function loadFaqItems() {
@@ -150,7 +171,7 @@ async function loadProfileCard(url) {
   const name = page.querySelector(".profile-copy h1")?.textContent.trim();
   const summary = page.querySelector(".profile-copy h1 + p")?.textContent.trim() || "";
   const initials = page.querySelector(".profile-photo")?.textContent.trim() || getInitials(name || "");
-  const generation = page.querySelector("meta[name='p2p-generation']")?.content.trim() || "Sin generacion";
+  const generation = page.querySelector("meta[name='p2p-generation']")?.content.trim() || "Sin generación";
   const category = page.querySelector("meta[name='p2p-category']")?.content.trim();
   const [role, ...descriptionParts] = summary.split(". ");
 
@@ -161,7 +182,7 @@ async function loadProfileCard(url) {
     initials,
     url,
     generation,
-    category: category || role || "Sin categoria"
+    category: category || role || "Sin categoría"
   };
 }
 
@@ -178,6 +199,10 @@ async function loadDirectoryItems(urls) {
 }
 
 async function renderDirectory() {
+  if (!membersGrid && !businessesGrid) {
+    return;
+  }
+
   const manifest = await loadDirectoryManifest();
   const [members, businesses] = await Promise.all([
     loadDirectoryItems(manifest.members || []),
@@ -188,7 +213,9 @@ async function renderDirectory() {
   renderCards(members, membersGrid);
   renderBusinessFilters(businesses);
   renderFilteredBusinesses();
-  memberCount.textContent = members.length;
+  if (memberCount) {
+    memberCount.textContent = members.length;
+  }
 }
 
 function uniqueValues(items, key) {
@@ -240,6 +267,10 @@ function closeFilterMenus() {
 }
 
 function renderFilterOptions(trigger, menu, values, selectedValue) {
+  if (!trigger || !menu) {
+    return;
+  }
+
   menu.innerHTML = "";
   const options = [{ value: "", label: "Todas" }, ...values.map((value) => ({ value, label: value }))];
 
@@ -268,11 +299,19 @@ function renderFilterOptions(trigger, menu, values, selectedValue) {
 }
 
 function renderBusinessFilters(businesses) {
+  if (!generationFilter || !categoryFilter) {
+    return;
+  }
+
   renderFilterOptions(generationFilter, generationFilterMenu, uniqueValues(businesses, "generation"), getFilterValue(generationFilter));
   renderFilterOptions(categoryFilter, categoryFilterMenu, uniqueValues(businesses, "category"), getFilterValue(categoryFilter));
 }
 
 function renderFilteredBusinesses() {
+  if (!businessesGrid || !businessCount) {
+    return;
+  }
+
   const generation = getFilterValue(generationFilter);
   const category = getFilterValue(categoryFilter);
   const filteredBusinesses = allBusinesses.filter((business) => {
@@ -293,6 +332,10 @@ function updateDirectoryScrollStates() {
 }
 
 function renderFeaturedVideo() {
+  if (!featuredVideoContainer) {
+    return;
+  }
+
   if (!featuredVideo.filename) {
     featuredVideoContainer.hidden = true;
     return;
@@ -308,6 +351,152 @@ function renderFeaturedVideo() {
   featuredVideoContainer.hidden = false;
 }
 
+async function loadBusinessRibbonAssets() {
+  try {
+    const response = await fetch(businessRibbonManifestUrl);
+
+    if (!response.ok) {
+      throw new Error("No se pudo cargar assets/Negocios Cinta/manifest.json");
+    }
+
+    const files = await response.json();
+    return Array.isArray(files) ? files : [];
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
+
+function normalizeRibbonPath(file) {
+  if (/^https?:\/\//i.test(file) || file.startsWith("assets/")) {
+    return file;
+  }
+
+  return `assets/Negocios%20Cinta/${encodeURIComponent(file)}`;
+}
+
+function findImageBounds(image) {
+  const maxSampleSize = 768;
+  const scale = Math.min(1, maxSampleSize / Math.max(image.naturalWidth, image.naturalHeight));
+  const sampleWidth = Math.max(1, Math.round(image.naturalWidth * scale));
+  const sampleHeight = Math.max(1, Math.round(image.naturalHeight * scale));
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d", { willReadFrequently: true });
+
+  canvas.width = sampleWidth;
+  canvas.height = sampleHeight;
+  context.drawImage(image, 0, 0, sampleWidth, sampleHeight);
+
+  const pixels = context.getImageData(0, 0, sampleWidth, sampleHeight).data;
+  let minX = sampleWidth;
+  let minY = sampleHeight;
+  let maxX = -1;
+  let maxY = -1;
+
+  for (let y = 0; y < sampleHeight; y += 1) {
+    for (let x = 0; x < sampleWidth; x += 1) {
+      const alpha = pixels[((y * sampleWidth + x) * 4) + 3];
+
+      if (alpha <= 10) {
+        continue;
+      }
+
+      minX = Math.min(minX, x);
+      minY = Math.min(minY, y);
+      maxX = Math.max(maxX, x);
+      maxY = Math.max(maxY, y);
+    }
+  }
+
+  if (maxX < 0 || maxY < 0) {
+    return {
+      x: 0,
+      y: 0,
+      width: image.naturalWidth,
+      height: image.naturalHeight
+    };
+  }
+
+  return {
+    x: Math.max(0, Math.floor(minX / scale)),
+    y: Math.max(0, Math.floor(minY / scale)),
+    width: Math.min(image.naturalWidth, Math.ceil((maxX - minX + 1) / scale)),
+    height: Math.min(image.naturalHeight, Math.ceil((maxY - minY + 1) / scale))
+  };
+}
+
+function normalizeRibbonImage(image) {
+  const cachedSource = ribbonImageCache.get(image.currentSrc || image.src);
+
+  if (cachedSource) {
+    image.src = cachedSource;
+    image.classList.add("is-normalized");
+    return;
+  }
+
+  try {
+    const bounds = findImageBounds(image);
+    const outputSize = 320;
+    const contentSize = 284;
+    const scale = Math.min(contentSize / bounds.width, contentSize / bounds.height);
+    const drawWidth = Math.max(1, Math.round(bounds.width * scale));
+    const drawHeight = Math.max(1, Math.round(bounds.height * scale));
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+
+    canvas.width = outputSize;
+    canvas.height = outputSize;
+    context.clearRect(0, 0, outputSize, outputSize);
+    context.drawImage(
+      image,
+      bounds.x,
+      bounds.y,
+      bounds.width,
+      bounds.height,
+      Math.round((outputSize - drawWidth) / 2),
+      Math.round((outputSize - drawHeight) / 2),
+      drawWidth,
+      drawHeight
+    );
+
+    const normalizedSource = canvas.toDataURL("image/png");
+    ribbonImageCache.set(image.currentSrc || image.src, normalizedSource);
+    image.src = normalizedSource;
+    image.classList.add("is-normalized");
+  } catch (error) {
+    console.error(error);
+    image.classList.add("is-normalized");
+  }
+}
+
+async function renderBusinessRibbon() {
+  if (!businessRibbonTrack) {
+    return;
+  }
+
+  const files = await loadBusinessRibbonAssets();
+  businessRibbonTrack.innerHTML = "";
+  businessRibbonTrack.classList.toggle("is-empty", files.length === 0);
+
+  if (files.length === 0) {
+    return;
+  }
+
+  [...files, ...files].forEach((file) => {
+    const item = document.createElement("div");
+    item.className = "business-ribbon-item";
+
+    const image = document.createElement("img");
+    image.src = normalizeRibbonPath(file);
+    image.alt = "";
+    image.loading = "lazy";
+    image.addEventListener("load", () => normalizeRibbonImage(image), { once: true });
+
+    item.appendChild(image);
+    businessRibbonTrack.appendChild(item);
+  });
+}
+
 function normalizeText(value) {
   return value
     .toLowerCase()
@@ -317,6 +506,10 @@ function normalizeText(value) {
 }
 
 function addMessage(text, sender = "bot") {
+  if (!chatMessages) {
+    return;
+  }
+
   const message = document.createElement("div");
   message.className = `message ${sender}`;
   message.textContent = text;
@@ -391,18 +584,30 @@ function askQuestion(question) {
 }
 
 function openChat() {
+  if (!chatPanel || !chatToggle) {
+    return;
+  }
+
   chatPanel.classList.add("is-open");
   chatPanel.setAttribute("aria-hidden", "false");
   chatToggle.setAttribute("aria-expanded", "true");
 }
 
 function closeChatPanel() {
+  if (!chatPanel || !chatToggle) {
+    return;
+  }
+
   chatPanel.classList.remove("is-open");
   chatPanel.setAttribute("aria-hidden", "true");
   chatToggle.setAttribute("aria-expanded", "false");
 }
 
 function renderQuestionBank(query = "") {
+  if (!suggestedQuestions) {
+    return;
+  }
+
   suggestedQuestions.innerHTML = "";
 
   if (!query.trim()) {
@@ -426,13 +631,22 @@ function renderQuestionBank(query = "") {
 }
 
 function renderCards(items, container) {
+  if (!container) {
+    return;
+  }
+
   container.innerHTML = "";
+  const cardsAreLinks = container.dataset.cardLinks !== "false";
 
   items.forEach((item) => {
-    const card = document.createElement("a");
+    const card = document.createElement(cardsAreLinks ? "a" : "article");
     card.className = "directory-card";
-    card.href = item.url;
-    card.setAttribute("aria-label", `Ver perfil de ${item.name}`);
+
+    if (cardsAreLinks) {
+      card.href = item.url;
+      card.setAttribute("aria-label", `Ver perfil de ${item.name}`);
+    }
+
     card.innerHTML = `
       <div class="photo-preview" aria-label="Vista previa de foto de ${item.name}">${item.initials}</div>
       <div class="card-body">
@@ -456,6 +670,10 @@ function getInitials(name) {
 }
 
 function renderSponsors() {
+  if (!sponsorsGrid) {
+    return;
+  }
+
   sponsorsGrid.innerHTML = "";
 
   sponsors.forEach((sponsor) => {
@@ -489,21 +707,23 @@ function renderSponsors() {
   });
 }
 
-chatToggle.addEventListener("click", () => {
-  if (chatPanel.classList.contains("is-open")) {
-    closeChatPanel();
-    return;
-  }
+if (chatToggle && chatPanel && chatInput) {
+  chatToggle.addEventListener("click", () => {
+    if (chatPanel.classList.contains("is-open")) {
+      closeChatPanel();
+      return;
+    }
 
-  openChat();
-  chatInput.focus();
-});
+    openChat();
+    chatInput.focus();
+  });
+}
 
-closeChat.addEventListener("click", closeChatPanel);
+closeChat?.addEventListener("click", closeChatPanel);
 
-chatForm.addEventListener("submit", (event) => {
+chatForm?.addEventListener("submit", (event) => {
   event.preventDefault();
-  const firstQuestion = suggestedQuestions.querySelector(".question-option");
+  const firstQuestion = suggestedQuestions?.querySelector(".question-option");
 
   if (firstQuestion) {
     askQuestion(firstQuestion.textContent);
@@ -513,7 +733,7 @@ chatForm.addEventListener("submit", (event) => {
   renderQuestionBank("");
 });
 
-chatInput.addEventListener("input", () => {
+chatInput?.addEventListener("input", () => {
   renderQuestionBank(chatInput.value);
 });
 
@@ -521,7 +741,7 @@ directoryScrollContainers.forEach((container) => {
   container.addEventListener("scroll", () => updateDirectoryScrollStates(), { passive: true });
 });
 
-[generationFilter, categoryFilter].forEach((trigger) => {
+[generationFilter, categoryFilter].filter(Boolean).forEach((trigger) => {
   trigger.addEventListener("click", () => {
     const control = trigger.closest(".filter-control");
     const isOpen = control.classList.contains("is-open");
@@ -550,9 +770,11 @@ document.addEventListener("click", (event) => {
 window.addEventListener("resize", closeFilterMenus);
 window.addEventListener("scroll", closeFilterMenus, true);
 
+configurePostulationLinks();
 renderSponsors();
 renderFeaturedVideo();
 renderDirectory();
+renderBusinessRibbon();
 updateDirectoryScrollStates();
 
 addMessage("Hola. Soy el asistente de Prompt to Prosperity. Elige una pregunta frecuente o escribe tu duda.");

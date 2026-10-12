@@ -8,6 +8,8 @@ const port = Number(process.env.PORT || 8000);
 
 const contentTypes = {
   ".css": "text/css; charset=utf-8",
+  ".avif": "image/avif",
+  ".gif": "image/gif",
   ".html": "text/html; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",
   ".json": "application/json; charset=utf-8",
@@ -27,7 +29,11 @@ function serveFile(request, response) {
     filePath = "/index.html";
   }
 
-  if (filePath === "/index.html" || filePath === "/pages/directory.json") {
+  if (
+    filePath === "/index.html" ||
+    filePath === "/pages/directory.json" ||
+    filePath === "/assets/Negocios Cinta/manifest.json"
+  ) {
     generateDirectory();
   }
 
@@ -56,5 +62,5 @@ generateDirectory();
 
 http.createServer(serveFile).listen(port, () => {
   console.log(`Servidor listo en http://localhost:${port}`);
-  console.log("El directorio se actualiza al refrescar index.html.");
+  console.log("El directorio y la cinta se actualizan al refrescar sus paginas.");
 });

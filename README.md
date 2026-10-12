@@ -17,6 +17,8 @@ gratuita, cupos limitados y acompanamiento de expertos.
 - `pages/miembros/`: paginas individuales para perfiles de miembros.
 - `pages/negocios/`: paginas individuales para perfiles de negocios.
 - `pages/directory.json`: indice generado automaticamente desde las paginas HTML.
+- `assets/Negocios Cinta/manifest.json`: indice generado automaticamente desde
+  las imagenes de `assets/Negocios Cinta/`.
 
 ## Perfiles de comunidad
 
@@ -50,3 +52,22 @@ npm run dev
 
 Esto permite que el navegador cargue `faq.md` y que el indice de comunidad se
 actualice desde los archivos reales en `pages`.
+
+## Cinta de negocios
+
+Para cambiar los logos o imagenes de la cinta del inicio, agrega o elimina
+archivos de imagen dentro de:
+
+```bash
+assets/Negocios Cinta/
+```
+
+No edites `assets/Negocios Cinta/manifest.json` manualmente. Se regenera al
+ejecutar:
+
+```bash
+npm run sync-pages
+```
+
+Tambien se actualiza al correr `npm run build` o al refrescar la pagina con
+`npm run dev`.

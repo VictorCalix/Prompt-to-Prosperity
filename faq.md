@@ -10,7 +10,7 @@ Prompt to Prosperity es un programa para que emprendedores hondureños lleven la
 Palabras clave: qué es, prompt, prosperity, iniciativa, proyecto, programa
 
 ## ¿Quiénes crearon el programa?
-La información pública menciona a Katheryne Lara y Jamim Chavarria como creadoras del programa, impulsando formación práctica en IA para emprendedores en Honduras.
+La información pública menciona a Katheryne Lara y Jamim Chavarría como creadoras del programa, impulsando formación práctica en IA para emprendedores en Honduras.
 
 Palabras clave: crearon, creadoras, fundadoras, katheryne, jamim, quiénes somos
 
@@ -63,5 +63,3 @@ Palabras clave: proponer, inscribir, negocio, contacto, correo, postular, convoc
 Puedes escribir por mensaje directo a @prompttoprosperity en Instagram, buscar Prompt to Prosperity en Facebook, TikTok y LinkedIn, o escribir al correo prompttoprosperity@gmail.com.
 
 Palabras clave: contacto, correo, email, instagram, facebook, tiktok, linkedin, mensaje directo
-
-## ¿Como puedo entrar?
