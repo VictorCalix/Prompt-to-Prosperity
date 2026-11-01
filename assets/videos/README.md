@@ -1,15 +1,18 @@
 # Videos
 
-Coloca aqui un archivo de video, por ejemplo `presentacion.mp4`.
+Coloca aqui el archivo `video-informativo.mp4`. Aparece en el inicio como una
+miniatura compacta debajo de la tarjeta del hero y se abre en grande al hacer
+clic.
 
-Para mostrarlo en la pagina, abre `script.js` y cambia la propiedad
-`featuredVideo.filename` por el nombre exacto del archivo:
+Para usar otro archivo, abre `script.js` y cambia los datos de `featuredVideo`:
 
 ```js
 const featuredVideo = {
-  filename: "presentacion.mp4",
-  title: "Presentacion de Prompt to Prosperity"
+  filename: "video-informativo.mp4",
+  title: "Video informativo",
+  description: "Conoce Prompt to Prosperity"
 };
 ```
 
-Si `filename` queda vacio, no se muestra ningun espacio de video.
+Si el archivo no existe, la miniatura muestra "Disponible proximamente". Si
+`filename` queda vacio, no se muestra ningun espacio de video.

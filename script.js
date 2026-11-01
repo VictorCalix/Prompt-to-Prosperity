@@ -3,8 +3,9 @@ let faqItems = [];
 
 // Escribe aquí el nombre de un archivo ubicado en assets/videos/ para mostrarlo.
 const featuredVideo = {
-  filename: "",
-  title: "Video de Prompt to Prosperity"
+  filename: "video-informativo.mp4",
+  title: "Video informativo",
+  description: "Conoce Prompt to Prosperity"
 };
 
 const directoryManifestUrl = "pages/directory.json";
@@ -75,6 +76,17 @@ const categoryFilter = document.querySelector("#categoryFilter");
 const generationFilterMenu = document.querySelector("#generationFilterMenu");
 const categoryFilterMenu = document.querySelector("#categoryFilterMenu");
 const featuredVideoContainer = document.querySelector("#featuredVideo");
+const videoDialog = document.querySelector("#videoDialog");
+const videoPlayer = document.querySelector("#videoPlayer");
+const closeVideo = document.querySelector("#closeVideo");
+const curriculumTabs = document.querySelectorAll(".curriculum-tab");
+const curriculumTitle = document.querySelector("#curriculumTitle");
+const curriculumText = document.querySelector("#curriculumText");
+const eligibilityCheck = document.querySelector("#eligibilityCheck");
+const eligibilityMeter = document.querySelector("#eligibilityMeter");
+const eligibilityStatus = document.querySelector("#eligibilityStatus");
+const applyButton = document.querySelector("#applyButton");
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const businessRibbonTrack = document.querySelector("#businessRibbonTrack");
 const directoryScrollContainers = document.querySelectorAll(".directory-scroll");
 const postulationLinks = document.querySelectorAll("[data-postulation-link]");
@@ -341,14 +353,106 @@ function renderFeaturedVideo() {
     return;
   }
 
-  const video = document.createElement("video");
-  video.controls = true;
-  video.preload = "metadata";
-  video.playsInline = true;
-  video.setAttribute("aria-label", featuredVideo.title);
-  video.src = `assets/videos/${encodeURIComponent(featuredVideo.filename)}`;
-  featuredVideoContainer.replaceChildren(video);
+  const source = `assets/videos/${encodeURIComponent(featuredVideo.filename)}`;
+  const trigger = document.createElement("button");
+  trigger.className = "video-trigger";
+  trigger.type = "button";
+  trigger.innerHTML = `
+    <span class="video-thumb"><span class="video-play"></span></span>
+    <span class="video-trigger-copy">
+      <strong>${featuredVideo.title}</strong>
+      <span>${featuredVideo.description}</span>
+    </span>
+  `;
+
+  // La miniatura solo carga metadatos: el video completo se descarga al abrirlo.
+  const thumbnail = document.createElement("video");
+  thumbnail.muted = true;
+  thumbnail.preload = "metadata";
+  thumbnail.playsInline = true;
+  thumbnail.setAttribute("aria-hidden", "true");
+  thumbnail.addEventListener("error", () => {
+    thumbnail.remove();
+    trigger.disabled = true;
+    trigger.querySelector(".video-trigger-copy span").textContent = "Disponible próximamente";
+  });
+  thumbnail.src = `${source}#t=0.1`;
+  trigger.querySelector(".video-thumb").prepend(thumbnail);
+
+  trigger.addEventListener("click", () => {
+    videoPlayer.src = source;
+    videoDialog.showModal();
+    videoPlayer.play();
+  });
+
+  featuredVideoContainer.replaceChildren(trigger);
   featuredVideoContainer.hidden = false;
+}
+
+function closeVideoDialog() {
+  videoDialog.close();
+}
+
+function selectCurriculumTab(selectedTab) {
+  curriculumTabs.forEach((tab) => {
+    const isSelected = tab === selectedTab;
+    tab.classList.toggle("is-active", isSelected);
+    tab.setAttribute("aria-pressed", String(isSelected));
+  });
+
+  curriculumTitle.textContent = selectedTab.querySelector("strong").textContent;
+  curriculumText.textContent = selectedTab.dataset.detail;
+}
+
+function updateEligibility() {
+  const checks = [...eligibilityCheck.querySelectorAll("input")];
+  const checked = checks.filter((input) => input.checked).length;
+  const isReady = checked === checks.length;
+
+  eligibilityMeter.style.width = `${(checked / checks.length) * 100}%`;
+  eligibilityStatus.textContent = isReady
+    ? "¡Cumples los requisitos! Ya puedes postularte."
+    : `${checked} de ${checks.length} requisitos`;
+  applyButton.classList.toggle("is-ready", isReady);
+}
+
+function animateCount(element) {
+  const target = Number(element.dataset.count);
+  const suffix = element.dataset.suffix || "";
+  const duration = 900;
+  const start = performance.now();
+
+  function step(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    element.textContent = `${Math.round(target * progress)}${suffix}`;
+
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    }
+  }
+
+  window.requestAnimationFrame(step);
+}
+
+function setupReveal() {
+  const blocks = document.querySelectorAll("[data-reveal]");
+
+  if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.filter((entry) => entry.isIntersecting).forEach((entry) => {
+      entry.target.classList.add("is-visible");
+      entry.target.querySelectorAll("[data-count]").forEach(animateCount);
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.15 });
+
+  blocks.forEach((block) => {
+    block.classList.add("reveal");
+    observer.observe(block);
+  });
 }
 
 async function loadBusinessRibbonAssets() {
@@ -721,6 +825,22 @@ if (chatToggle && chatPanel && chatInput) {
 
 closeChat?.addEventListener("click", closeChatPanel);
 
+closeVideo?.addEventListener("click", closeVideoDialog);
+
+videoDialog?.addEventListener("click", (event) => {
+  if (event.target === videoDialog) {
+    closeVideoDialog();
+  }
+});
+
+videoDialog?.addEventListener("close", () => videoPlayer.pause());
+
+curriculumTabs.forEach((tab) => {
+  tab.addEventListener("click", () => selectCurriculumTab(tab));
+});
+
+eligibilityCheck?.addEventListener("change", updateEligibility);
+
 chatForm?.addEventListener("submit", (event) => {
   event.preventDefault();
   const firstQuestion = suggestedQuestions?.querySelector(".question-option");
@@ -776,6 +896,7 @@ renderFeaturedVideo();
 renderDirectory();
 renderBusinessRibbon();
 updateDirectoryScrollStates();
+setupReveal();
 
 addMessage("Hola. Soy el asistente de Prompt to Prosperity. Elige una pregunta frecuente o escribe tu duda.");
 loadFaqItems();
