@@ -55,7 +55,7 @@ El proceso considera la calidad y completitud de la aplicación, motivación, co
 Palabras clave: selección, seleccionan, criterios, aplicación, motivación, compromiso, crecimiento, impacto
 
 ## ¿Cómo puedo proponer un negocio o postularme?
-La convocatoria aparece publicada como abierta en redes. Puedes seguir Instagram y TikTok como @prompttoprosperity para revisar cupos, fechas y enlaces oficiales de aplicación.
+Puedes seguir Instagram y TikTok como @prompttoprosperity para revisar convocatorias, cupos, fechas y enlaces oficiales de aplicación.
 
 Palabras clave: proponer, inscribir, negocio, contacto, correo, postular, convocatoria, cupos, aplicar
 

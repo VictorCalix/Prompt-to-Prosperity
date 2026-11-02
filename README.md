@@ -62,6 +62,10 @@ archivos de imagen dentro de:
 assets/Negocios Cinta/
 ```
 
+Si la imagen se llama igual que la pagina del negocio (por ejemplo
+`royal-sugar.png` para `pages/negocios/royal-sugar.html`), tambien se usa como
+logo en su tarjeta de Comunidad y en su perfil.
+
 No edites `assets/Negocios Cinta/manifest.json` manualmente. Se regenera al
 ejecutar:
 

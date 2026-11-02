@@ -3,7 +3,7 @@ let faqItems = [];
 
 // Escribe aquí el nombre de un archivo ubicado en assets/videos/ para mostrarlo.
 const featuredVideo = {
-  filename: "video-informativo.mp4",
+  filename: "video-temporal.mp4",
   title: "Video informativo",
   description: "Conoce Prompt to Prosperity"
 };
@@ -28,26 +28,9 @@ const legacyMembers = [
   }
 ];
 
-const legacyBusinesses = [
-  {
-    name: "Café Aurora",
-    role: "Alimentos y bebidas",
-    description: "Negocio local en proceso de mejorar pedidos, contenido y atención digital.",
-    initials: "CA",
-    url: "pages/negocios/cafe-aurora.html"
-  },
-  {
-    name: "Studio Verde",
-    role: "Servicios creativos",
-    description: "Emprendimiento que busca ordenar procesos y captar clientes en línea.",
-    initials: "SV",
-    url: "pages/negocios/studio-verde.html"
-  }
-];
-
 const fallbackDirectory = {
   members: legacyMembers.map((member) => member.url),
-  businesses: legacyBusinesses.map((business) => business.url)
+  businesses: []
 };
 
 // Agrega aliados estratégicos con { name, logo, url }. Ejemplo de logo: "assets/aliados/marca.png".
@@ -216,12 +199,16 @@ async function renderDirectory() {
   }
 
   const manifest = await loadDirectoryManifest();
-  const [members, businesses] = await Promise.all([
+  const [members, businesses, ribbonFiles] = await Promise.all([
     loadDirectoryItems(manifest.members || []),
-    loadDirectoryItems(manifest.businesses || [])
+    loadDirectoryItems(manifest.businesses || []),
+    loadBusinessRibbonAssets()
   ]);
 
-  allBusinesses = businesses;
+  allBusinesses = businesses.map((business) => ({
+    ...business,
+    logo: findBusinessLogo(business, ribbonFiles)
+  }));
   renderCards(members, membersGrid);
   renderBusinessFilters(businesses);
   renderFilteredBusinesses();
@@ -365,10 +352,12 @@ function renderFeaturedVideo() {
     </span>
   `;
 
-  // La miniatura solo carga metadatos: el video completo se descarga al abrirlo.
+  // La miniatura se reproduce en bucle y sin sonido; el audio queda para el reproductor grande.
   const thumbnail = document.createElement("video");
   thumbnail.muted = true;
-  thumbnail.preload = "metadata";
+  thumbnail.loop = true;
+  thumbnail.autoplay = !prefersReducedMotion;
+  thumbnail.preload = prefersReducedMotion ? "metadata" : "auto";
   thumbnail.playsInline = true;
   thumbnail.setAttribute("aria-hidden", "true");
   thumbnail.addEventListener("error", () => {
@@ -477,6 +466,14 @@ function normalizeRibbonPath(file) {
   }
 
   return `assets/Negocios%20Cinta/${encodeURIComponent(file)}`;
+}
+
+// El logo de un negocio es la imagen de la cinta con el mismo nombre que su página.
+function findBusinessLogo(business, ribbonFiles) {
+  const slug = business.url.split("/").pop().replace(".html", "");
+  const file = ribbonFiles.find((ribbonFile) => ribbonFile.replace(/\.[^.]+$/, "") === slug);
+
+  return file ? normalizeRibbonPath(file) : "";
 }
 
 function findImageBounds(image) {
@@ -751,8 +748,12 @@ function renderCards(items, container) {
       card.setAttribute("aria-label", `Ver perfil de ${item.name}`);
     }
 
+    const preview = item.logo
+      ? `<div class="photo-preview has-logo"><img src="${item.logo}" alt="Logo de ${item.name}" loading="lazy"></div>`
+      : `<div class="photo-preview" aria-label="Vista previa de foto de ${item.name}">${item.initials}</div>`;
+
     card.innerHTML = `
-      <div class="photo-preview" aria-label="Vista previa de foto de ${item.name}">${item.initials}</div>
+      ${preview}
       <div class="card-body">
         <span class="card-meta">${item.role}</span>
         <h4>${item.name}</h4>

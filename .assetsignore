@@ -7,3 +7,5 @@ package.json
 package-lock.json
 npm-debug.log*
 README.md
+*.xlsx
+NO SUBIR A COMMIT

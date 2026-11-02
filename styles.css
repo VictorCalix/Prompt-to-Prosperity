@@ -59,6 +59,41 @@ input {
   outline-offset: 3px;
 }
 
+.announcement-bar {
+  display: none;
+  margin: 0;
+  padding: 6px clamp(18px, 5vw, 72px);
+  color: var(--brand);
+  background: var(--mint);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.announcement-bar a {
+  text-decoration: underline;
+}
+
+.postulation-closed .announcement-bar {
+  display: block;
+}
+
+.postulation-closed [data-postulation-only] {
+  display: none;
+}
+
+.postulation-closed .help-note {
+  margin-top: 0;
+}
+
+@media (max-width: 560px) {
+  .announcement-bar {
+    padding-right: 10px;
+    padding-left: 10px;
+    font-size: 0.76rem;
+  }
+}
+
 .site-header {
   position: sticky;
   top: 0;
@@ -1618,6 +1653,19 @@ main {
     linear-gradient(135deg, var(--teal-dark), var(--brand));
 }
 
+.directory-card .photo-preview.has-logo {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+
+.photo-preview img {
+  display: block;
+  width: 100%;
+  height: 132px;
+  padding: 0 16px;
+  object-fit: contain;
+}
+
 .card-body {
   padding: 18px;
 }
@@ -1776,7 +1824,7 @@ main {
 .video-thumb {
   position: relative;
   display: grid;
-  width: 128px;
+  width: clamp(128px, 44%, 240px);
   aspect-ratio: 16 / 9;
   flex: 0 0 auto;
   place-items: center;
@@ -1890,9 +1938,11 @@ main {
 }
 
 .profile-photo {
+  position: relative;
   display: grid;
   aspect-ratio: 1;
   place-items: center;
+  overflow: hidden;
   color: var(--white);
   background:
     linear-gradient(135deg, rgba(5, 56, 74, 0.96), rgba(12, 149, 142, 0.86)),
@@ -1901,6 +1951,16 @@ main {
   box-shadow: var(--shadow);
   font-size: clamp(3rem, 8vw, 5.5rem);
   font-weight: 800;
+}
+
+.profile-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 12%;
+  background: var(--white);
+  object-fit: contain;
 }
 
 .profile-copy h1 {
@@ -1932,8 +1992,19 @@ main {
   box-shadow: var(--shadow-soft);
 }
 
+.profile-card:only-child {
+  grid-column: 1 / -1;
+}
+
 .profile-card h2 {
   margin: 0 0 12px;
+}
+
+.profile-card a {
+  color: var(--teal-dark);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+  text-decoration: underline;
 }
 
 .profile-card p,
