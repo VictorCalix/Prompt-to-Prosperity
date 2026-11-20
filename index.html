@@ -9,356 +9,755 @@
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prompt to Prosperity</title>
-  <meta name="description" content="Prompt to Prosperity ayuda a emprendedores hondureños a llevar la inteligencia artificial de la teoría a la práctica.">
+  <title data-i18n="meta.title">Prompt to Prosperity | Programa de superinteligencia para emprendedores</title>
+  <meta name="description" content="Prompt to Prosperity es un programa de entrenamiento práctico en el uso de superinteligencia para emprendedores hondureños." data-i18n-attr="content:meta.description">
   <link rel="icon" type="image/png" href="assets/Logos/favicon-bot.png">
   <link rel="apple-touch-icon" href="assets/Logos/favicon-bot.png">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <p class="announcement-bar">
+  <!-- Engranaje reutilizable para los fondos decorativos (estilo de los artes de PtP). -->
+  <svg class="svg-sprite" aria-hidden="true" focusable="false">
+    <symbol id="gear" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="12" stroke-dasharray="10.5 10.44"></circle>
+      <path fill="currentColor" fill-rule="evenodd" d="M50 16a34 34 0 1 1 0 68a34 34 0 1 1 0-68zM50 37a13 13 0 1 0 0 26a13 13 0 1 0 0-26z"></path>
+    </symbol>
+  </svg>
+
+  <p class="announcement-bar" data-i18n="announce.closed">
     Convocatoria cerrada. Infórmate en nuestras <a href="#redes">redes</a>.
   </p>
 
   <header class="site-header">
     <div class="header-identity">
-      <a class="brand" href="#inicio" aria-label="Ir al inicio">
+      <a class="brand" href="#inicio" aria-label="Ir al inicio" data-i18n-attr="aria-label:nav.home">
         <img class="brand-logo" src="assets/Logos/Logo%20Grande.png" alt="Prompt to Prosperity">
       </a>
+      <div class="lang-switch" role="group" aria-label="Idioma" data-i18n-attr="aria-label:lang.label">
+        <button type="button" data-lang="es" aria-pressed="true">ES</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
     </div>
 
-    <nav class="site-nav" aria-label="Navegación principal">
-      <a href="#programa">Programa</a>
-      <a href="comunidad.html">Comunidad</a>
-      <a href="#sobre">Conócenos</a>
-      <a class="nav-pill" href="#postulacion" data-postulation-only>¡Postúlate!</a>
+    <nav class="site-nav" aria-label="Navegación principal" data-i18n-attr="aria-label:nav.label">
+      <a href="#programa" data-i18n="nav.program">Programa</a>
+      <a href="#cifras" data-i18n="nav.stats">Cifras</a>
+      <a href="comunidad.html" data-i18n="nav.community">Comunidad</a>
+      <a href="#por-que" data-i18n="nav.about">Conócenos</a>
+      <a class="nav-pill" href="#postulacion" data-postulation-only data-i18n="nav.apply">¡Postúlate!</a>
     </nav>
   </header>
 
   <main id="inicio">
-    <section class="hero">
-      <div class="hero-copy">
-        <div class="hero-title-panel">
-          <p class="eyebrow">Tecnología para emprendedores</p>
-          <h1>Prompt to Prosperity</h1>
-        </div>
-        <p class="hero-description">
-          Un programa para que emprendedores hondureños lleven la inteligencia
-          artificial de la teoría a la práctica: marketing, productividad,
-          datos, operaciones y toma de decisiones, con formación gratuita y
-          acompañamiento de expertos.
+    <!-- 1. HERO: el video presenta el programa y ocupa toda la entrada. -->
+    <section class="hero" aria-labelledby="hero-title">
+      <!-- El archivo del video de fondo se elige en script.js (videos.fondo). -->
+      <video id="heroVideo" class="hero-video" muted loop playsinline preload="metadata" poster="assets/Programa/hero-poster.jpg" aria-hidden="true"></video>
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <svg class="gear gear-hero-a" aria-hidden="true"><use href="#gear"></use></svg>
+      <svg class="gear gear-hero-b" aria-hidden="true"><use href="#gear"></use></svg>
+
+      <div class="hero-panel">
+        <p class="hero-kicker" data-i18n="hero.kicker">Programa de superinteligencia para emprendedores</p>
+        <h1 id="hero-title">Prompt to <span>Prosperity</span></h1>
+        <p class="hero-description" data-i18n="hero.description">
+          Un programa de entrenamiento práctico en el uso de superinteligencia
+          para emprendedores hondureños.
         </p>
         <div class="hero-actions">
-          <a class="button dark" href="#postulacion" data-postulation-link data-postulation-only>Postúlate</a>
-          <a class="button secondary" href="#programa">Conoce el programa</a>
+          <a class="button primary" href="#programa" data-i18n="hero.cta">Conoce el programa</a>
+          <!-- Espacio del video informativo: aparece solo cuando videos.informativo tiene un nombre en script.js. -->
+          <button id="openVideo" class="button ghost" type="button" hidden>
+            <span class="play-dot" aria-hidden="true"></span>
+            <span data-i18n="hero.video">Ver video informativo</span>
+          </button>
+          <a class="button dark" href="#postulacion" data-postulation-link data-postulation-only data-i18n="hero.apply">Postúlate</a>
         </div>
-      </div>
-      <div class="hero-aside">
-        <div class="hero-visual" aria-label="Resumen visual del proyecto">
-          <div class="visual-topline">
-            <span>IA práctica</span>
-            <strong>Para negocios reales</strong>
-          </div>
-          <div class="visual-card main">
-            <span>Programa</span>
-            <strong>10 meses de formación + acompañamiento</strong>
-          </div>
-          <div class="visual-stack">
-            <div class="visual-card">
-              <span>Marketing</span>
-              <strong>Mejor presencia digital y atención al cliente</strong>
-            </div>
-            <div class="visual-card">
-              <span>Operaciones</span>
-              <strong>Mayor productividad y procesos más claros</strong>
-            </div>
-            <div class="visual-card accent">
-              <span>Decisiones</span>
-              <strong>Datos para crecer</strong>
-            </div>
-          </div>
-        </div>
-        <section id="featuredVideo" class="featured-video" aria-label="Video informativo"></section>
+        <p class="hero-links">
+          <a href="#cifras" data-i18n="hero.link.stats">Cifras de la Generación 1</a>
+          <span aria-hidden="true">·</span>
+          <a href="#ayudar" data-i18n="hero.link.help">Cómo ayudar</a>
+          <span aria-hidden="true">·</span>
+          <a href="comunidad.html" data-i18n="hero.link.community">Negocios participantes</a>
+        </p>
       </div>
     </section>
 
-    <div class="logobar">
-      <div class="logo-strip">
-        <img class="logo-flag" src="assets/EE.UU/Flag-strip.png" alt="Bandera de Estados Unidos">
-        <img class="logo-seal" src="assets/EE.UU/Embassy-header-small.png" alt="Embajada de Estados Unidos en Tegucigalpa">
-        <img class="logo-seal" src="assets/EE.UU/Alumni-header-small.png" alt="Exchange Alumni">
-        <img class="logo-freedom" src="assets/EE.UU/Freedom-250-strip.png" alt="Freedom 250">
+    <!-- 2. ACERCA DEL PROGRAMA (presentación, slides 5 y 6). -->
+    <section id="programa" class="section program-section">
+      <svg class="gear gear-soft gear-program" aria-hidden="true"><use href="#gear"></use></svg>
+      <div class="program-intro" data-reveal>
+        <div class="program-copy">
+          <p class="eyebrow" data-i18n="program.eyebrow">El programa</p>
+          <h2 class="section-title" data-i18n="program.title">Acerca del Programa</h2>
+          <p class="lead" data-i18n="program.lead">
+            Durante 10 meses, los participantes seleccionados tendrán acceso a
+            formación práctica en superinteligencia, herramientas digitales,
+            mentorías, expertos nacionales e internacionales y una comunidad de
+            emprendedores con ganas de crecer, innovar y generar impacto.
+          </p>
+          <p class="program-audience" data-i18n="program.audience">
+            Dirigido a quienes quieren aplicar lo aprendido directamente en su
+            negocio y convertir la SI en una herramienta real para crecer,
+            optimizar procesos y abrir nuevas oportunidades a través de:
+          </p>
+          <ul class="method-chips">
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 9 10-5 10 5-10 5z"></path><path d="M6 11v5c3 2.5 9 2.5 12 0v-5"></path></svg>
+              <span data-i18n="program.method.1">Talleres prácticos y teóricos</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"></path><path d="m8.5 12 2.5 2.5 4.5-5"></path></svg>
+              <span data-i18n="program.method.2">Mentorías individuales</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path><path d="M3 13h18"></path></svg>
+              <span data-i18n="program.method.3">Ejercicios en tu propio negocio</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg>
+              <span data-i18n="program.method.4">Implementación de SI</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="3"></circle><circle cx="16" cy="8" r="3"></circle><path d="M2 20c0-3.3 2.7-6 6-6 1.5 0 2.9.6 4 1.5 1.1-.9 2.5-1.5 4-1.5 3.3 0 6 2.7 6 6"></path></svg>
+              <span data-i18n="program.method.5">Networking entre emprendedores</span>
+            </li>
+          </ul>
+        </div>
+
+        <figure class="program-photos">
+          <img class="photo-main" src="assets/Programa/emprendedores-laptop.jpg" alt="Emprendedores trabajando juntos frente a sus computadoras" data-i18n-attr="alt:program.photo1" loading="lazy">
+          <img class="photo-small" src="assets/Programa/equipo-reunion.jpg" alt="Grupo de emprendedores en una sesión de trabajo" data-i18n-attr="alt:program.photo2" loading="lazy">
+          <figcaption data-i18n="program.photoCaption">Más práctica que teoría: cada participante trabaja sobre su propio negocio.</figcaption>
+        </figure>
       </div>
-      <p class="logobar-caption">
-        Financiado por el Departamento de Estado de los Estados Unidos a través
-        del Alumni Engagement Innovation Fund (AEIF)
-      </p>
+
+      <div class="program-stats" aria-label="Formato del programa" data-i18n-attr="aria-label:program.statsLabel" data-reveal>
+        <article class="stat-tile tone-deep">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+          <strong data-count="10" data-suffix-key="program.stat.months.suffix" data-suffix=" meses">10 meses</strong>
+          <span data-i18n="program.stat.months">de duración</span>
+        </article>
+        <article class="stat-tile tone-teal-dark">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><circle cx="17" cy="9.5" r="2.5"></circle><path d="M2 20c0-3.3 3.1-6 7-6s7 2.7 7 6"></path><path d="M16 14.1c3.2-.5 6 1.9 6 5.9"></path></svg>
+          <strong data-count="3">3</strong>
+          <span data-i18n="program.stat.inperson">encuentros presenciales</span>
+        </article>
+        <article class="stat-tile tone-teal">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18h10a4 4 0 0 0 .6-8A6 6 0 0 0 6 9.5 4.3 4.3 0 0 0 7 18z"></path></svg>
+          <strong data-count="17">17</strong>
+          <span data-i18n="program.stat.virtual">sesiones virtuales</span>
+        </article>
+        <article class="stat-tile tone-slate">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
+          <strong data-i18n="program.stat.saturdays">Sábados</strong>
+          <span data-i18n="program.stat.schedule">6PM EST (excepto los presenciales: 11AM EST)</span>
+        </article>
+      </div>
+
+      <div class="session-format" data-reveal>
+        <article>
+          <strong data-i18n="format.sessions.value">2 horas</strong>
+          <h3 data-i18n="format.sessions.title">Sesiones</h3>
+          <p data-i18n="format.sessions.text">Cada sesión temática dura 2 horas.</p>
+        </article>
+        <article>
+          <strong data-i18n="format.workshops.value">3 horas</strong>
+          <h3 data-i18n="format.workshops.title">Talleres de SI</h3>
+          <p data-i18n="format.workshops.text">Cada taller práctico de SI dura 3 horas.</p>
+        </article>
+        <p class="session-note" data-i18n="format.note">
+          Las sesiones dedican más tiempo a la práctica que a la teoría, y cada
+          taller cierra con un espacio para preguntas y respuestas.
+        </p>
+      </div>
+    </section>
+
+    <!-- 3. BENEFICIOS: "Durante 10 meses tendrás acceso a" (arte de PtP). -->
+    <section id="beneficios" class="section benefits-section">
+      <svg class="gear gear-benefits-a" aria-hidden="true"><use href="#gear"></use></svg>
+      <svg class="gear gear-benefits-b" aria-hidden="true"><use href="#gear"></use></svg>
+
+      <div class="benefits-layout" data-reveal>
+        <div class="benefits-head">
+          <p class="benefits-badge">
+            <span class="benefits-number">10</span>
+            <span class="benefits-words">
+              <span data-i18n="benefits.during">Durante</span>
+              <strong data-i18n="benefits.months">meses</strong>
+            </span>
+          </p>
+          <p class="benefits-pill" data-i18n="benefits.access">tendrás acceso a</p>
+          <img class="benefits-photo" src="assets/Programa/emprendedor-datos.jpg" alt="Emprendedor analizando datos de su negocio" data-i18n-attr="alt:benefits.photo" loading="lazy">
+        </div>
+
+        <ul class="benefit-list">
+          <li class="benefit-item">
+            <span class="benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></span>
+            <span data-i18n="benefits.item.1">Suscripciones gratuitas a <strong>Claude</strong> y <strong>Canva pro</strong></span>
+          </li>
+          <li class="benefit-item">
+            <span class="benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"></rect><path d="M12 16v4M8 20h8"></path><circle cx="12" cy="9" r="2"></circle><path d="M8.5 14a3.5 3.5 0 0 1 7 0"></path></svg></span>
+            <span data-i18n="benefits.item.2">Talleres con expertos nacionales e internacionales.</span>
+          </li>
+          <li class="benefit-item">
+            <span class="benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="7" r="3"></circle><path d="M3 20v-2a5 5 0 0 1 10 0v2"></path><rect x="14" y="9" width="8" height="6" rx="1"></rect><path d="M18 15v3"></path></svg></span>
+            <span data-i18n="benefits.item.3">Mentorías 1 a 1 con profesionales y expertos.</span>
+          </li>
+          <li class="benefit-item">
+            <span class="benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"></rect><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"></path><path d="M10 14l2-4 2 4M10.6 13h2.8"></path></svg></span>
+            <span data-i18n="benefits.item.4">Formación práctica en superinteligencia aplicada a negocios.</span>
+          </li>
+          <li class="benefit-item">
+            <span class="benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="5.5" r="2.5"></circle><circle cx="5" cy="18" r="2.5"></circle><circle cx="19" cy="18" r="2.5"></circle><path d="M10.8 7.7 6.2 15.8M13.2 7.7l4.6 8.1M7.5 18h9"></path></svg></span>
+            <span data-i18n="benefits.item.5">Networking con otros emprendedores, profesionales y aliados.</span>
+          </li>
+          <li class="benefit-item">
+            <span class="benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 3 4.5v14c5 0 7.5.5 9 2 1.5-1.5 4-2 9-2v-14c-5 0-7.5.5-9 2z"></path><path d="M12 6.5v14"></path></svg></span>
+            <span data-i18n="benefits.item.6">Recursos y materiales complementarios.</span>
+          </li>
+          <li class="benefit-item">
+            <span class="benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"></circle><path d="M8.5 14 7 21l5-2.5 5 2.5-1.5-7"></path><path d="m12 6 .9 1.9 2.1.3-1.5 1.4.4 2.1-1.9-1-1.9 1 .4-2.1L9 8.2l2.1-.3z"></path></svg></span>
+            <span data-i18n="benefits.item.7">Programa con respaldo de la Embajada de los Estados Unidos en Honduras.</span>
+          </li>
+          <li class="benefit-item">
+            <span class="benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"></path><circle cx="12" cy="12" r="3"></circle></svg></span>
+            <span data-i18n="benefits.item.8">Visibilidad y exposición en redes a los negocios participantes.</span>
+          </li>
+
+          <li class="benefit-item benefit-extra" hidden>
+            <span class="benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path></svg></span>
+            <span data-i18n="benefits.extra.1">Herramientas para productividad, operaciones, marketing, marca y datos.</span>
+          </li>
+          <li class="benefit-item benefit-extra" hidden>
+            <span class="benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-8"></path><path d="M15 7h6v6"></path></svg></span>
+            <span data-i18n="benefits.extra.2">Espacio para presentar avances y resultados.</span>
+          </li>
+          <li class="benefit-item benefit-extra benefit-highlight" hidden>
+            <span class="benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"></circle><path d="M8.5 14 7 21l5-2.5 5 2.5-1.5-7"></path><path d="m9.5 9 1.8 1.8 3.2-3.2"></path></svg></span>
+            <span data-i18n="benefits.extra.3">Certificado oficial respaldado por PtP y la Embajada de EE. UU. en Honduras.<small>El certificado está sujeto al cumplimiento de los requisitos del programa.</small></span>
+          </li>
+        </ul>
+
+        <button id="benefitsMore" class="benefits-more" type="button" aria-expanded="false">
+          <span data-i18n="benefits.more">y mucho más</span>
+          <span class="benefits-more-icon" aria-hidden="true">+</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 4. CURRÍCULUM: 5 tarjetas de doble cara. -->
+    <section id="curriculum" class="section curriculum-section">
+      <div class="section-heading wide" data-reveal>
+        <p class="eyebrow" data-i18n="curr.eyebrow">Currículum</p>
+        <h2 class="section-title" data-i18n="curr.title">¿Qué aprenderán los emprendedores?</h2>
+        <p class="section-hint" data-i18n="curr.hint">Pasa el cursor o toca cada módulo para ver su descripción.</p>
+      </div>
+
+      <div class="module-grid" data-reveal>
+        <button class="module-card" type="button" aria-pressed="false">
+          <span class="module-inner">
+            <span class="module-face module-front">
+              <span class="module-num">1</span>
+              <strong>AI Foundations</strong>
+              <span class="module-flip-hint" aria-hidden="true">↻</span>
+            </span>
+            <span class="module-face module-back">
+              <strong>AI Foundations</strong>
+              <span class="module-lead" data-i18n="curr.1.lead">Introducción a la SI y oportunidades para emprendedores.</span>
+              <span data-i18n="curr.1.body">Qué es la superinteligencia, cómo funcionan sus herramientas y en qué partes del día a día de un emprendimiento puede generar valor.</span>
+            </span>
+          </span>
+        </button>
+        <button class="module-card" type="button" aria-pressed="false">
+          <span class="module-inner">
+            <span class="module-face module-front">
+              <span class="module-num">2</span>
+              <strong>Prompt Engineering</strong>
+              <span class="module-flip-hint" aria-hidden="true">↻</span>
+            </span>
+            <span class="module-face module-back">
+              <strong>Prompt Engineering</strong>
+              <span class="module-lead" data-i18n="curr.2.lead">Cómo obtener mejores resultados de herramientas de SI.</span>
+              <span data-i18n="curr.2.body">Escribir instrucciones claras, con contexto y ejemplos, para que cada respuesta sea útil y se pueda aplicar al negocio.</span>
+            </span>
+          </span>
+        </button>
+        <button class="module-card" type="button" aria-pressed="false">
+          <span class="module-inner">
+            <span class="module-face module-front">
+              <span class="module-num">3</span>
+              <strong>Marketing &amp; Personal Brand</strong>
+              <span class="module-flip-hint" aria-hidden="true">↻</span>
+            </span>
+            <span class="module-face module-back">
+              <strong>Marketing &amp; Personal Brand</strong>
+              <span class="module-lead" data-i18n="curr.3.lead">Automatizar contenido digital, manejar datos de clientes y mejorar posicionamiento.</span>
+              <span data-i18n="curr.3.body">Crear publicaciones, campañas y mensajes con apoyo de la SI, y construir una marca coherente en redes sociales.</span>
+            </span>
+          </span>
+        </button>
+        <button class="module-card" type="button" aria-pressed="false">
+          <span class="module-inner">
+            <span class="module-face module-front">
+              <span class="module-num">4</span>
+              <strong>Productivity &amp; Operations</strong>
+              <span class="module-flip-hint" aria-hidden="true">↻</span>
+            </span>
+            <span class="module-face module-back">
+              <strong>Productivity &amp; Operations</strong>
+              <span class="module-lead" data-i18n="curr.4.lead">Automatización y optimización de procesos.</span>
+              <span data-i18n="curr.4.body">Detectar tareas repetitivas y ordenar inventarios, agendas y procesos para liberar tiempo y dedicarlo a hacer crecer el negocio.</span>
+            </span>
+          </span>
+        </button>
+        <button class="module-card" type="button" aria-pressed="false">
+          <span class="module-inner">
+            <span class="module-face module-front">
+              <span class="module-num">5</span>
+              <strong>Data &amp; Decision Making</strong>
+              <span class="module-flip-hint" aria-hidden="true">↻</span>
+            </span>
+            <span class="module-face module-back">
+              <strong>Data &amp; Decision Making</strong>
+              <span class="module-lead" data-i18n="curr.5.lead">Análisis de información para mejores decisiones.</span>
+              <span data-i18n="curr.5.body">Leer ventas, clientes y costos con ayuda de la SI para detectar oportunidades y tomar decisiones con evidencia.</span>
+            </span>
+          </span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 5. IMPACTO ESPERADO (slide 8). -->
+    <section id="resultados" class="section results-section">
+      <div class="section-heading wide" data-reveal>
+        <p class="eyebrow" data-i18n="results.eyebrow">Resultados</p>
+        <h2 class="section-title" data-i18n="results.title">Impacto esperado</h2>
+      </div>
+      <ul class="results-grid" data-reveal>
+        <li class="tone-deep">
+          <span class="result-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg></span>
+          <span data-i18n="results.1">Mayor productividad</span>
+        </li>
+        <li class="tone-teal">
+          <span class="result-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.5 3.8 5.5 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.5-3.8-9S9.5 5.5 12 3z"></path></svg></span>
+          <span data-i18n="results.2">Mejor presencia digital</span>
+        </li>
+        <li class="tone-maroon">
+          <span class="result-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 18.5V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H8z"></path><path d="M8.5 10.5c1 1 2.2 1.5 3.5 1.5s2.5-.5 3.5-1.5"></path></svg></span>
+          <span data-i18n="results.3">Mejor atención al cliente</span>
+        </li>
+        <li class="tone-deep">
+          <span class="result-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></span>
+          <span data-i18n="results.4">Procesos más eficientes y óptimos</span>
+        </li>
+        <li class="tone-teal">
+          <span class="result-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"></path></svg></span>
+          <span data-i18n="results.5">Decisiones basadas en datos</span>
+        </li>
+        <li class="tone-maroon">
+          <span class="result-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 3 4.5v14c5 0 7.5.5 9 2 1.5-1.5 4-2 9-2v-14c-5 0-7.5.5-9 2z"></path><path d="M12 6.5v14"></path></svg></span>
+          <span data-i18n="results.6">Materiales bilingües para ampliar mercados</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 6. CIFRAS DE LA GENERACIÓN 1 (estadísticas de Kat). -->
+    <section id="cifras" class="section stats-section">
+      <svg class="gear gear-stats" aria-hidden="true"><use href="#gear"></use></svg>
+      <div class="section-heading wide" data-reveal>
+        <p class="eyebrow" data-i18n="stats.eyebrow">Nuestras estadísticas · Generación 1</p>
+        <h2 class="section-title" data-i18n="stats.title">De 212 postulaciones, 40 seleccionados</h2>
+        <p class="section-lead" data-i18n="stats.lead">
+          Datos recolectados de los aplicantes e información solicitada en el
+          Formulario de Aplicación a los emprendedores hondureños.
+        </p>
+      </div>
+
+      <div class="stats-board" data-reveal>
+        <div class="cohort-card">
+          <p class="cohort-label" data-i18n="stats.cohort">Generación 1 · Cifras de la convocatoria</p>
+          <div class="cohort-funnel">
+            <article>
+              <strong data-count="212">212</strong>
+              <span data-i18n="stats.applied">personas se postularon y completaron la aplicación</span>
+            </article>
+            <span class="funnel-arrow" aria-hidden="true">→</span>
+            <article class="is-selected">
+              <strong data-count="40">40</strong>
+              <span data-i18n="stats.selected">participantes seleccionados para el programa</span>
+            </article>
+          </div>
+
+          <div class="gender-split">
+            <p class="chart-title" data-i18n="stats.gender">Género de las postulaciones</p>
+            <div class="gender-bar" role="img" aria-label="132 mujeres (62.3 %) y 78 hombres (36.8 %)" data-i18n-attr="aria-label:stats.gender.aria">
+              <span class="gender-women" style="--share: 62.3"></span>
+              <span class="gender-men" style="--share: 36.8"></span>
+            </div>
+            <div class="gender-legend">
+              <p><strong data-i18n="stats.women">132 mujeres</strong><span data-i18n="stats.women.pct">62.3 % de las postulaciones</span></p>
+              <p><strong data-i18n="stats.men">78 hombres</strong><span data-i18n="stats.men.pct">36.8 % de las postulaciones</span></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-explorer">
+          <div class="stats-tabs" role="tablist" aria-label="Estadísticas" data-i18n-attr="aria-label:stats.tabs">
+            <button id="tab-perfil" class="stats-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="panel-perfil" data-i18n="stats.tab.profile">Perfil de postulantes</button>
+            <button id="tab-seleccion" class="stats-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-seleccion" tabindex="-1" data-i18n="stats.tab.selected">Los 40 seleccionados</button>
+            <button id="tab-criterios" class="stats-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-criterios" tabindex="-1" data-i18n="stats.tab.criteria">Cómo seleccionamos</button>
+          </div>
+
+          <div id="panel-perfil" class="stats-panel is-active" role="tabpanel" aria-labelledby="tab-perfil">
+            <div id="profileCharts" class="chart-grid"></div>
+          </div>
+
+          <div id="panel-seleccion" class="stats-panel" role="tabpanel" aria-labelledby="tab-seleccion" hidden>
+            <div class="chart-grid selected-grid">
+              <div id="sectorChart" class="chart-card"></div>
+              <div class="chart-card type-card">
+                <p class="chart-title" data-i18n="stats.type">Por tipo de emprendimiento</p>
+                <p class="chart-sub" data-i18n="stats.type.sub">40 participantes seleccionados</p>
+                <div class="type-split">
+                  <p><strong data-count="27">27</strong><span data-i18n="stats.type.product">Producto · 67.5 %</span></p>
+                  <p class="is-service"><strong data-count="13">13</strong><span data-i18n="stats.type.service">Servicio · 32.5 %</span></p>
+                </div>
+                <div class="type-bar" aria-hidden="true"><span style="--share: 67.5"></span><span style="--share: 32.5"></span></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="panel-criterios" class="stats-panel" role="tabpanel" aria-labelledby="tab-criterios" hidden>
+            <p class="criteria-intro" data-i18n="stats.criteria.intro">Aspectos que consideramos en el proceso de selección:</p>
+            <ul class="criteria-list">
+              <li data-i18n="stats.criteria.1">La calidad y completitud de la aplicación</li>
+              <li data-i18n="stats.criteria.2">Motivación para formar parte del programa</li>
+              <li data-i18n="stats.criteria.3">El nivel de compromiso que demuestren</li>
+              <li data-i18n="stats.criteria.4">El potencial de crecimiento del emprendimiento</li>
+              <li data-i18n="stats.criteria.5">Interés en implementar SI en su negocio</li>
+              <li data-i18n="stats.criteria.6">La claridad sobre cómo aplicará lo aprendido</li>
+              <li class="is-key" data-i18n="stats.criteria.7">Interés en generar un impacto positivo en su comunidad</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Barra de cifras en movimiento (estilo Beyond Borders). La segunda mitad es copia para el bucle. -->
+    <div class="stats-ticker" aria-label="Cifras destacadas" data-i18n-attr="aria-label:ticker.label">
+      <div class="ticker-track">
+        <p><strong>212</strong> <span data-i18n="ticker.1">postulaciones completas</span></p>
+        <p><strong>40</strong> <span data-i18n="ticker.2">emprendedores seleccionados</span></p>
+        <p><strong>62.3 %</strong> <span data-i18n="ticker.3">de las postulaciones son de mujeres</span></p>
+        <p><strong>13</strong> <span data-i18n="ticker.4">negocios de alimentos</span></p>
+        <p><strong>27</strong> <span data-i18n="ticker.5">emprendimientos de producto</span></p>
+        <p><strong>10</strong> <span data-i18n="ticker.6">meses de formación</span></p>
+        <p><strong>17</strong> <span data-i18n="ticker.7">sesiones virtuales</span></p>
+        <p aria-hidden="true"><strong>212</strong> <span data-i18n="ticker.1">postulaciones completas</span></p>
+        <p aria-hidden="true"><strong>40</strong> <span data-i18n="ticker.2">emprendedores seleccionados</span></p>
+        <p aria-hidden="true"><strong>62.3 %</strong> <span data-i18n="ticker.3">de las postulaciones son de mujeres</span></p>
+        <p aria-hidden="true"><strong>13</strong> <span data-i18n="ticker.4">negocios de alimentos</span></p>
+        <p aria-hidden="true"><strong>27</strong> <span data-i18n="ticker.5">emprendimientos de producto</span></p>
+        <p aria-hidden="true"><strong>10</strong> <span data-i18n="ticker.6">meses de formación</span></p>
+        <p aria-hidden="true"><strong>17</strong> <span data-i18n="ticker.7">sesiones virtuales</span></p>
+      </div>
     </div>
 
-    <section id="programa" class="section program-section">
-      <div class="section-heading" data-reveal>
-        <p class="eyebrow">El programa</p>
-        <h2>Un programa diseñado para aplicar IA en negocios reales</h2>
-      </div>
-
-      <div class="program-layout">
-        <div class="program-stats" aria-label="Formato del programa" data-reveal>
-          <article>
-            <strong data-count="10" data-suffix=" meses">10 meses</strong>
-            <span>de duración</span>
-          </article>
-          <article>
-            <strong data-count="3">3</strong>
-            <span>encuentros presenciales</span>
-          </article>
-          <article>
-            <strong data-count="17">17</strong>
-            <span>sesiones virtuales</span>
-          </article>
-        </div>
-
-        <div class="curriculum" aria-label="Currículo de aprendizaje" data-reveal>
-          <div class="curriculum-tabs">
-            <button class="curriculum-tab is-active" type="button" aria-pressed="true" data-detail="Introducción a la IA y oportunidades para emprendedores.">
-              <span>01</span>
-              <strong>AI Foundations</strong>
-            </button>
-            <button class="curriculum-tab" type="button" aria-pressed="false" data-detail="Cómo obtener mejores resultados de herramientas de IA.">
-              <span>02</span>
-              <strong>Prompt Engineering</strong>
-            </button>
-            <button class="curriculum-tab" type="button" aria-pressed="false" data-detail="Contenido digital, datos de clientes y mejor posicionamiento.">
-              <span>03</span>
-              <strong>Marketing & Personal Brand</strong>
-            </button>
-            <button class="curriculum-tab" type="button" aria-pressed="false" data-detail="Automatización y optimización de procesos del negocio.">
-              <span>04</span>
-              <strong>Productivity & Operations</strong>
-            </button>
-            <button class="curriculum-tab" type="button" aria-pressed="false" data-detail="Análisis de información para tomar mejores decisiones.">
-              <span>05</span>
-              <strong>Data & Decision Making</strong>
-            </button>
-          </div>
-          <div class="curriculum-detail" aria-live="polite">
-            <h3 id="curriculumTitle">AI Foundations</h3>
-            <p id="curriculumText">Introducción a la IA y oportunidades para emprendedores.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="beneficios" class="section impact-section">
-      <div class="section-heading" data-reveal>
-        <h2>Beneficios</h2>
-      </div>
-
-      <div class="program-layout">
-        <div class="benefit-grid" data-reveal>
-          <article class="benefit-card">
-            <span class="benefit-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M12 3l1.9 5.6a3 3 0 0 0 1.9 1.9L21 12l-5.2 1.5a3 3 0 0 0-1.9 1.9L12 21l-1.9-5.6a3 3 0 0 0-1.9-1.9L3 12l5.2-1.5a3 3 0 0 0 1.9-1.9z"></path></svg>
-            </span>
-            <h3>Suscripción a Claude</h3>
-          </article>
-          <article class="benefit-card">
-            <span class="benefit-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3.5"></circle><circle cx="17" cy="9.5" r="2.5"></circle><path d="M2 20c0-3.3 2.7-6 6-6s6 2.7 6 6"></path><path d="M16 14.1c3.2-.5 6 1.9 6 5.9"></path></svg>
-            </span>
-            <h3>Mentorías 1 a 1</h3>
-          </article>
-          <article class="benefit-card">
-            <span class="benefit-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"></rect><path d="M12 16v4"></path><path d="M8 20h8"></path><path d="m7.5 12 3-3 2.5 2.5 3.5-3.5"></path></svg>
-            </span>
-            <h3>Talleres con expertos nacionales e internacionales</h3>
-          </article>
-          <article class="benefit-card">
-            <span class="benefit-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 3 4.5v14c5 0 7.5.5 9 2 1.5-1.5 4-2 9-2v-14c-5 0-7.5.5-9 2z"></path><path d="M12 6.5v14"></path></svg>
-            </span>
-            <h3>Recursos para productividad, operaciones, marketing, marca y datos</h3>
-          </article>
-          <article class="benefit-card">
-            <span class="benefit-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c2.5 2.5 3.8 5.5 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.5-3.8-9S9.5 5.5 12 3z"></path></svg>
-            </span>
-            <h3>Materiales bilingües</h3>
-          </article>
-          <article class="benefit-card">
-            <span class="benefit-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="5.5" r="2.5"></circle><circle cx="5" cy="18" r="2.5"></circle><circle cx="19" cy="18" r="2.5"></circle><path d="M10.8 7.7 6.2 15.8"></path><path d="m13.2 7.7 4.6 8.1"></path><path d="M7.5 18h9"></path></svg>
-            </span>
-            <h3>Networking</h3>
-          </article>
-          <article class="benefit-card">
-            <span class="benefit-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-            </span>
-            <h3>Visibilidad</h3>
-          </article>
-          <article class="benefit-card">
-            <span class="benefit-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-8"></path><path d="M15 7h6v6"></path></svg>
-            </span>
-            <h3>Espacios para presentar avances</h3>
-          </article>
-          <article class="benefit-card">
-            <span class="benefit-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"></circle><path d="M8.5 14 7 21l5-2.5 5 2.5-1.5-7"></path><path d="m9.5 9 1.8 1.8 3.2-3.2"></path></svg>
-            </span>
-            <h3>Certificado</h3>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="business-ribbon" aria-label="Negocios destacados">
+    <section class="business-ribbon" aria-label="Negocios destacados" data-i18n-attr="aria-label:ribbon.label">
       <div id="businessRibbonTrack" class="business-ribbon-track"></div>
     </section>
 
-    <section id="sobre" class="section">
-      <div class="section-heading" data-reveal>
-        <h2>Quiénes somos y qué hacemos</h2>
+    <!-- 7. POR QUÉ LO HACEMOS (slides 3 y 4). -->
+    <section id="por-que" class="section why-section">
+      <svg class="gear gear-soft gear-why" aria-hidden="true"><use href="#gear"></use></svg>
+      <div class="section-heading wide" data-reveal>
+        <p class="eyebrow" data-i18n="why.eyebrow">Por qué lo hacemos</p>
+        <h2 class="section-title" data-i18n="why.title">La brecha digital del emprendimiento</h2>
+        <p class="section-lead" data-i18n="why.lead">
+          Muchos emprendedores ya conocen la superinteligencia, pero pocos logran
+          convertirla en una ventaja para su negocio. Estas son las barreras que
+          queremos ayudar a superar:
+        </p>
       </div>
 
-      <div class="info-grid" data-reveal>
-        <article>
-          <h3>Quiénes somos</h3>
-          <p>
-            Somos una iniciativa creada por Katheryne Lara y Jamim Chavarría
-            para que emprendedores hondureños aprendan, experimenten y
-            construyan con inteligencia artificial.
-          </p>
+      <div class="why-grid" data-reveal>
+        <article class="tone-teal-dark">
+          <span class="why-num">01</span>
+          <h3 data-i18n="why.1.title">Tienen múltiples roles al mismo tiempo.</h3>
+          <p data-i18n="why.1.text">Venden, atienden, producen y llevan las cuentas. Les queda poco tiempo para aprender herramientas nuevas.</p>
         </article>
-        <article>
-          <h3>Qué hacemos</h3>
-          <p>
-            Facilitamos talleres especializados, mentorías, recursos y
-            acompañamiento para aplicar IA en cada área del negocio.
-          </p>
+        <article class="tone-teal">
+          <span class="why-num">02</span>
+          <h3 data-i18n="why.2.title">Carecen de apoyo técnico especializado.</h3>
+          <p data-i18n="why.2.text">Pocas veces cuentan con alguien que les enseñe a aplicar la tecnología a su caso concreto.</p>
         </article>
-         <article>
-          <h3>Por qué</h3>
-          <p>
-            Existe una brecha digital que limita el crecimiento de muchos
-            emprendimientos. Queremos convertir la tecnología en una herramienta
-            accesible, no en una barrera.
-          </p>
+        <article class="tone-deep">
+          <span class="why-num">03</span>
+          <h3 data-i18n="why.3.title">Utilizan SI de manera limitada.</h3>
+          <p data-i18n="why.3.text">La usan para tareas sueltas, como redactar un mensaje, sin aprovechar todo lo que puede hacer por su negocio.</p>
+        </article>
+        <article class="tone-maroon">
+          <span class="why-num">04</span>
+          <h3 data-i18n="why.4.title">No transforman la SI en procesos de negocio.</h3>
+          <p data-i18n="why.4.text">Sin un método, lo que aprenden no se convierte en más ventas, ahorro de tiempo ni mejores decisiones.</p>
         </article>
       </div>
-    </section>
 
-    <section id="aliados-estrategicos" class="section sponsors-section">
-      <div class="section-heading" data-reveal>
-        <div class="section-title-row allies-title-row">
-          <span class="section-icon" aria-hidden="true">
-            <img class="rocket-image" src="assets/Logos/cohete-teal.png" alt="">
-          </span>
-          <h2>Aliados que impulsan el programa</h2>
+      <div class="solution-block" data-reveal>
+        <div class="solution-copy">
+          <p class="eyebrow" data-i18n="why.solution.eyebrow">Nuestra respuesta</p>
+          <h3>Prompt to Prosperity</h3>
+          <p data-i18n="why.solution.text">
+            Empoderar a emprendedores hondureños con habilidades prácticas en
+            superinteligencia para fortalecer su productividad, mejorar su
+            presencia digital, optimizar la gestión de sus negocios y generar
+            mayores oportunidades de crecimiento económico.
+          </p>
         </div>
+        <ul class="solution-circles">
+          <li data-i18n="why.solution.1">Talleres especializados</li>
+          <li data-i18n="why.solution.2">Mentorías</li>
+          <li data-i18n="why.solution.3">Laboratorios de SI</li>
+        </ul>
       </div>
-
-      <div id="sponsorsGrid" class="sponsor-grid" data-reveal></div>
     </section>
 
-    <section id="postulacion" class="application-section" aria-labelledby="postulacion-title">
-      <div class="application-layout" data-postulation-only>
+    <!-- 8. ALIANZA INSTITUCIONAL: logos oficiales + aliados, una sola vez en la página. -->
+    <section id="alianzas" class="section alliance-section">
+      <div class="section-heading wide" data-reveal>
+        <p class="eyebrow" data-i18n="alliance.eyebrow">Alianza institucional</p>
+        <h2 class="section-title" data-i18n="alliance.title">Respaldado por un ecosistema de confianza.</h2>
+      </div>
+
+      <div class="alliance-card" data-reveal>
+        <!-- Orden obligatorio AEIF: bandera, sello de la Embajada, Exchange Alumni. -->
+        <div class="logo-strip official-logos">
+          <img class="logo-flag" src="assets/EE.UU/Flag-strip.png" alt="Bandera de Estados Unidos" data-i18n-attr="alt:alliance.flag">
+          <img class="logo-seal" src="assets/EE.UU/Embassy-header-small.png" alt="Embajada de Estados Unidos en Tegucigalpa" data-i18n-attr="alt:alliance.embassy">
+          <img class="logo-seal" src="assets/EE.UU/Alumni-header-small.png" alt="Exchange Alumni">
+        </div>
+        <p class="partners-label" data-i18n="alliance.partners">En alianza con</p>
+        <div class="logo-strip partner-logos">
+          <a class="partner-logo" href="https://www.bancatlan.hn/" target="_blank" rel="noopener">
+            <img src="assets/Aliados/banco-atlantida.svg" alt="Banco Atlántida">
+          </a>
+          <!-- Si falta assets/Aliados/adh.png se muestra el texto "ADH". -->
+          <a class="partner-logo" href="https://www.instagram.com/adhenlinea/" target="_blank" rel="noopener">
+            <img class="logo-square" src="assets/Aliados/adh.png" alt="Asociación Despierta Honduras (ADH)" data-fallback-text="ADH">
+          </a>
+        </div>
+        <p class="alliance-caption" data-i18n="alliance.funding">
+          Financiado por el Departamento de Estado de los Estados Unidos a través
+          del Alumni Engagement Innovation Fund (AEIF).
+        </p>
+      </div>
+
+      <ul class="alliance-chips" data-reveal>
+        <li class="is-featured"><a href="https://hn.usembassy.gov/es/" target="_blank" rel="noopener" data-i18n="alliance.chip.1">★ Embajada de los Estados Unidos en Honduras · Respaldo del programa</a></li>
+        <li class="is-featured" data-i18n="alliance.chip.2">Departamento de Estado de los EE. UU. · Alumni Engagement Innovation Fund (AEIF)</li>
+        <li><a href="https://www.instagram.com/adhenlinea/" target="_blank" rel="noopener" data-i18n="alliance.chip.3">Asociación Despierta Honduras (ADH) · Aliado</a></li>
+        <li><a href="https://www.bancatlan.hn/" target="_blank" rel="noopener" data-i18n="alliance.chip.4">Banco Atlántida · Aliado</a></li>
+        <li data-i18n="alliance.chip.5">#ExchangeAlumni · Fulbright – Banco Atlántida</li>
+      </ul>
+    </section>
+
+    <section id="postulacion" class="application-section" aria-labelledby="postulacion-title" data-postulation-only>
+      <div class="application-layout">
         <div class="application-copy">
-          <p class="eyebrow">Convocatoria abierta</p>
-          <h2 id="postulacion-title">Postula tu negocio a Prompt to Prosperity</h2>
-          <p>
+          <p class="eyebrow" data-i18n="apply.eyebrow">Convocatoria abierta</p>
+          <h2 id="postulacion-title" data-i18n="apply.title">Postula tu negocio a Prompt to Prosperity</h2>
+          <p data-i18n="apply.text">
             Marca los requisitos que cumples y postula tu emprendimiento. Los
             participantes seleccionados también se integran a una comunidad de
             emprendedores que aprenden y crecen juntos.
           </p>
           <div class="application-actions" aria-label="Acciones de postulación">
-            <a id="applyButton" class="button primary" href="#postulacion" data-postulation-link>Postúlate</a>
-            <a class="button secondary" href="comunidad.html" target="_blank" rel="noopener">Ganadores</a>
+            <a id="applyButton" class="button primary" href="#postulacion" data-postulation-link data-i18n="hero.apply">Postúlate</a>
+            <a class="button secondary" href="comunidad.html" data-i18n="apply.community">Comunidad</a>
           </div>
         </div>
         <form id="eligibilityCheck" class="eligibility-check">
-          <h3>¿Cumples los requisitos?</h3>
-          <label><input type="checkbox"> Emprendimiento en operación</label>
-          <label><input type="checkbox"> Motivación y disponibilidad</label>
-          <label><input type="checkbox"> Inglés básico</label>
-          <label><input type="checkbox"> Computadora e internet estable</label>
-          <label><input type="checkbox"> Compromiso con el 90% de sesiones, actividades y trabajos</label>
+          <h3 data-i18n="apply.check">Requisitos para aplicar</h3>
+          <label><input type="checkbox"> <span data-i18n="apply.req.1">Ser emprendedor/a y tener un emprendimiento actualmente en operación</span></label>
+          <label><input type="checkbox"> <span data-i18n="apply.req.2">Tener alta motivación por aprender, innovar y fortalecer su negocio</span></label>
+          <label><input type="checkbox"> <span data-i18n="apply.req.3">Contar con un nivel básico de inglés (A1 o superior)</span></label>
+          <label><input type="checkbox"> <span data-i18n="apply.req.4">Tener acceso a una computadora y conexión estable a internet</span></label>
+          <label><input type="checkbox"> <span data-i18n="apply.req.5">Tener disponibilidad para participar durante los 10 meses del programa</span></label>
+          <label><input type="checkbox"> <span data-i18n="apply.req.6">Comprometerse a completar como mínimo el 90% de las sesiones, actividades y trabajos asignados</span></label>
+          <label><input type="checkbox"> <span data-i18n="apply.req.7">Tener un interés genuino en aplicar lo aprendido para fortalecer su emprendimiento y generar impacto positivo en su comunidad</span></label>
           <div class="eligibility-meter" aria-hidden="true"><span id="eligibilityMeter"></span></div>
-          <p id="eligibilityStatus" aria-live="polite">0 de 5 requisitos</p>
+          <p id="eligibilityStatus" aria-live="polite">0 de 7 requisitos</p>
         </form>
       </div>
+    </section>
 
-      <div id="ayudar" class="help-note">
-        <h3>Cómo ayudar</h3>
-        <p>
-          Puedes apoyar con mentorías, herramientas digitales,
-          difusión o conectándonos con negocios que puedan postularse al
-          programa.
+    <!-- 9. SÉ PARTE / CÓMO AYUDAR (sección final, estilo Beyond Borders). -->
+    <section id="ayudar" class="section help-section">
+      <svg class="gear gear-help-a" aria-hidden="true"><use href="#gear"></use></svg>
+      <svg class="gear gear-help-b" aria-hidden="true"><use href="#gear"></use></svg>
+
+      <div class="section-heading wide" data-reveal>
+        <p class="eyebrow" data-i18n="help.eyebrow">Sé parte del movimiento</p>
+        <h2 class="section-title" data-i18n="help.title">Cómo ayudar</h2>
+        <p class="section-lead" data-i18n="help.lead">
+          El programa crece con cada persona y organización que se suma. Elige la
+          forma de apoyo que mejor va contigo.
         </p>
       </div>
+
+      <div class="help-feature" data-reveal>
+        <a class="help-big" href="https://www.instagram.com/prompttoprosperity/" target="_blank" rel="noopener">
+          <span class="help-badge" data-i18n="help.big1.badge">Próxima convocatoria</span>
+          <strong data-i18n="help.big1.title">Entérate primero</strong>
+          <span data-i18n="help.big1.text">Síguenos en redes para saber cuándo se abre la próxima convocatoria y compártela con emprendedores que conozcas.</span>
+          <span class="help-cta" data-i18n="help.big1.cta">Seguir a @prompttoprosperity →</span>
+        </a>
+        <a class="help-big is-light" href="comunidad.html">
+          <span class="help-badge" data-i18n="help.big2.badge">Comunidad · Generación 1</span>
+          <strong data-i18n="help.big2.title">Apoya a los negocios participantes</strong>
+          <span data-i18n="help.big2.text">Conoce a los emprendedores del programa y elige sus productos y servicios. Comprarles también es apoyar.</span>
+          <span class="help-cta" data-i18n="help.big2.cta">Ver negocios →</span>
+        </a>
+      </div>
+
+      <p class="help-subtitle" data-reveal data-i18n="help.options">Otras formas de sumarte</p>
+      <ul class="help-options" data-reveal>
+        <li>
+          <a href="mailto:prompttoprosperity@gmail.com?subject=Quiero%20ser%20mentor%2Fa" data-i18n-attr="href:help.mail.mentor">
+            <span class="help-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3.5"></circle><path d="M2 20c0-3.3 2.7-6 6-6s6 2.7 6 6"></path><path d="m15 11 2 2 4-4"></path></svg></span>
+            <strong data-i18n="help.1.title">Sé mentor/a</strong>
+            <span data-i18n="help.1.text">Acompaña a un emprendedor en sesiones 1 a 1 y comparte lo que te ha funcionado.</span>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:prompttoprosperity@gmail.com?subject=Quiero%20impartir%20un%20taller" data-i18n-attr="href:help.mail.workshop">
+            <span class="help-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"></rect><path d="M12 16v4M8 20h8"></path><path d="m7.5 12 3-3 2.5 2.5 3.5-3.5"></path></svg></span>
+            <strong data-i18n="help.2.title">Imparte un taller</strong>
+            <span data-i18n="help.2.text">¿Sabes de marketing, finanzas, datos o tecnología? Facilita una sesión práctica para la generación.</span>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:prompttoprosperity@gmail.com?subject=Quiero%20donar%20herramientas" data-i18n-attr="href:help.mail.tools">
+            <span class="help-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="13" rx="2"></rect><path d="M12 8v13M3 12h18"></path><path d="M12 8c-1.5-3-5-3.5-5-1.5S10 8 12 8zM12 8c1.5-3 5-3.5 5-1.5S14 8 12 8z"></path></svg></span>
+            <strong data-i18n="help.3.title">Dona herramientas o licencias</strong>
+            <span data-i18n="help.3.text">Suscripciones, software o créditos que los emprendedores puedan usar en su día a día.</span>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:prompttoprosperity@gmail.com?subject=Quiero%20ofrecer%20un%20espacio" data-i18n-attr="href:help.mail.space">
+            <span class="help-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-5 7 5v13"></path><path d="M10 21v-5h4v5"></path></svg></span>
+            <strong data-i18n="help.4.title">Abre tus espacios</strong>
+            <span data-i18n="help.4.text">Presta un lugar para los encuentros presenciales, ferias o jornadas de trabajo.</span>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:prompttoprosperity@gmail.com?subject=Quiero%20conectar%20mercados" data-i18n-attr="href:help.mail.markets">
+            <span class="help-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="6" r="3"></circle><circle cx="18" cy="18" r="3"></circle><path d="m8.7 10.7 6.6-3.4M8.7 13.3l6.6 3.4"></path></svg></span>
+            <strong data-i18n="help.5.title">Conecta mercados</strong>
+            <span data-i18n="help.5.text">Presenta a los negocios con clientes, distribuidores, ferias o compradores.</span>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:prompttoprosperity@gmail.com?subject=Quiero%20dar%20apoyo%20profesional" data-i18n-attr="href:help.mail.probono">
+            <span class="help-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path><path d="M3 13h18"></path></svg></span>
+            <strong data-i18n="help.6.title">Apoyo profesional pro bono</strong>
+            <span data-i18n="help.6.text">Asesoría legal, contable, de diseño o fotografía para fortalecer a los negocios.</span>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:prompttoprosperity@gmail.com?subject=Quiero%20patrocinar%20el%20programa" data-i18n-attr="href:help.mail.sponsor">
+            <span class="help-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-9.3-9A5.2 5.2 0 0 1 12 6.6 5.2 5.2 0 0 1 21.3 12C19 16.6 12 21 12 21z"></path></svg></span>
+            <strong data-i18n="help.7.title">Patrocina la próxima generación</strong>
+            <span data-i18n="help.7.text">Empresas y organizaciones pueden financiar cupos, materiales o eventos del programa.</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/company/prompttoprosperity/" target="_blank" rel="noopener">
+            <span class="help-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"></path><path d="m16 6-4-4-4 4M12 2v13"></path></svg></span>
+            <strong data-i18n="help.8.title">Comparte el programa</strong>
+            <span data-i18n="help.8.text">Recomiéndanos en LinkedIn y en tus redes para que más aliados conozcan el impacto.</span>
+          </a>
+        </li>
+      </ul>
+
+      <p class="help-org" data-reveal data-i18n="help.org">
+        ¿Representas una organización? Escríbenos a
+        <a href="mailto:prompttoprosperity@gmail.com">prompttoprosperity@gmail.com</a> →
+      </p>
     </section>
   </main>
 
   <footer id="redes" class="site-footer">
-    <p>Nuestras redes:</p>
-    <div class="footer-links">
-      <a class="social-link social-instagram" href="https://www.instagram.com/prompttoprosperity/" target="_blank" rel="noopener" aria-label="Instagram de Prompt to Prosperity">
-        <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.4" cy="6.7" r="1"></circle></svg>
-        <span>@prompttoprosperity</span>
-      </a>
-      <a class="social-link social-tiktok" href="https://www.tiktok.com/@prompttoprosperity" target="_blank" rel="noopener" aria-label="TikTok de Prompt to Prosperity">
-        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 4v9.1a4.1 4.1 0 1 1-3.1-4V6.3a7.1 7.1 0 1 0 6 7V8.7a7.7 7.7 0 0 0 4.1 1.2V7.1A4.9 4.9 0 0 1 17 4h-3z"></path></svg>
-        <span>@prompttoprosperity</span>
-      </a>
-      <a class="social-link social-linkedin" href="https://www.linkedin.com/company/prompttoprosperity/" target="_blank" rel="noopener" aria-label="LinkedIn de Prompt to Prosperity">
-        <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="8" width="4" height="12"></rect><circle cx="6" cy="5" r="2"></circle><path d="M11 8h4v1.7a4.3 4.3 0 0 1 3.3-1.9c2.7 0 4.7 1.8 4.7 5.5V20h-4v-6.1c0-1.7-.6-2.8-2-2.8-1.1 0-1.8.8-2.1 1.5-.1.3-.1.7-.1 1V20h-4V8z"></path></svg>
-        <span>Prompt to Prosperity</span>
-      </a>
-      <a class="social-link social-facebook" href="https://www.facebook.com/prompttoprosperity" target="_blank" rel="noopener" aria-label="Facebook de Prompt to Prosperity">
-        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 8h2V4h-3c-3 0-5 2-5 5v2H6v4h2v5h4v-5h3l1-4h-4V9c0-.6.4-1 1-1h1z"></path></svg>
-        <span>@prompttoprosperity</span>
-      </a>
-      <a class="social-link social-threads" href="https://www.threads.com/prompttoprosperity" target="_blank" rel="noopener" aria-label="Threads de Prompt to Prosperity">
-        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M17.4 10.6c-.4-3.4-2.5-5.5-5.8-5.5-3.7 0-6.3 2.8-6.3 6.9 0 4.2 2.8 6.9 7.1 6.9 3.3 0 5.6-1.5 5.6-4.1 0-2.4-2-3.6-5-3.6h-1.2c-1.5 0-2.5.8-2.5 2 0 1.3 1.1 2.1 2.6 2.1 1.6 0 2.6-.9 2.6-2.2"></path><path d="M8.7 10.2c.1-1.8 1.4-3 3.2-3 1.5 0 2.5.7 3.1 2"></path></svg>
-        <span>@prompttoprosperity</span>
-      </a>
-      <a class="social-link social-email" href="mailto:prompttoprosperity@gmail.com" aria-label="Correo de Prompt to Prosperity">
-        <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg>
-        <span>prompttoprosperity@gmail.com</span>
-      </a>
+    <div class="footer-brand">
+      <img src="assets/Logos/Logo%20Grande.png" alt="Prompt to Prosperity" loading="lazy">
+      <p data-i18n="footer.text">Programa de entrenamiento práctico en el uso de superinteligencia para emprendedores hondureños.</p>
+    </div>
+    <div class="footer-social">
+      <p class="footer-title" data-i18n="footer.social">Nuestras redes:</p>
+      <div class="footer-links">
+        <a class="social-link social-instagram" href="https://www.instagram.com/prompttoprosperity/" target="_blank" rel="noopener" aria-label="Instagram de Prompt to Prosperity">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.4" cy="6.7" r="1"></circle></svg>
+          <span>@prompttoprosperity</span>
+        </a>
+        <a class="social-link social-tiktok" href="https://www.tiktok.com/@prompttoprosperity" target="_blank" rel="noopener" aria-label="TikTok de Prompt to Prosperity">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 4v9.1a4.1 4.1 0 1 1-3.1-4V6.3a7.1 7.1 0 1 0 6 7V8.7a7.7 7.7 0 0 0 4.1 1.2V7.1A4.9 4.9 0 0 1 17 4h-3z"></path></svg>
+          <span>@prompttoprosperity</span>
+        </a>
+        <a class="social-link social-linkedin" href="https://www.linkedin.com/company/prompttoprosperity/" target="_blank" rel="noopener" aria-label="LinkedIn de Prompt to Prosperity">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="8" width="4" height="12"></rect><circle cx="6" cy="5" r="2"></circle><path d="M11 8h4v1.7a4.3 4.3 0 0 1 3.3-1.9c2.7 0 4.7 1.8 4.7 5.5V20h-4v-6.1c0-1.7-.6-2.8-2-2.8-1.1 0-1.8.8-2.1 1.5-.1.3-.1.7-.1 1V20h-4V8z"></path></svg>
+          <span>Prompt to Prosperity</span>
+        </a>
+        <a class="social-link social-facebook" href="https://www.facebook.com/prompttoprosperity" target="_blank" rel="noopener" aria-label="Facebook de Prompt to Prosperity">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 8h2V4h-3c-3 0-5 2-5 5v2H6v4h2v5h4v-5h3l1-4h-4V9c0-.6.4-1 1-1h1z"></path></svg>
+          <span>@prompttoprosperity</span>
+        </a>
+        <a class="social-link social-threads" href="https://www.threads.com/prompttoprosperity" target="_blank" rel="noopener" aria-label="Threads de Prompt to Prosperity">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M17.4 10.6c-.4-3.4-2.5-5.5-5.8-5.5-3.7 0-6.3 2.8-6.3 6.9 0 4.2 2.8 6.9 7.1 6.9 3.3 0 5.6-1.5 5.6-4.1 0-2.4-2-3.6-5-3.6h-1.2c-1.5 0-2.5.8-2.5 2 0 1.3 1.1 2.1 2.6 2.1 1.6 0 2.6-.9 2.6-2.2"></path><path d="M8.7 10.2c.1-1.8 1.4-3 3.2-3 1.5 0 2.5.7 3.1 2"></path></svg>
+          <span>@prompttoprosperity</span>
+        </a>
+        <a class="social-link social-email" href="mailto:prompttoprosperity@gmail.com" aria-label="Correo de Prompt to Prosperity">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg>
+          <span>prompttoprosperity@gmail.com</span>
+        </a>
+      </div>
     </div>
   </footer>
 
-  <dialog id="videoDialog" class="video-dialog" aria-label="Video informativo">
-    <button id="closeVideo" class="icon-button" type="button" aria-label="Cerrar video">x</button>
+  <dialog id="videoDialog" class="video-dialog" aria-label="Video informativo de Prompt to Prosperity" data-i18n-attr="aria-label:video.label">
+    <button id="closeVideo" class="icon-button" type="button" aria-label="Cerrar video" data-i18n-attr="aria-label:video.close">x</button>
     <video id="videoPlayer" controls playsinline preload="none"></video>
   </dialog>
 
-  <div id="asistente" class="floating-actions" aria-label="Preguntas frecuentes">
-    <section id="chatPanel" class="floating-chat" aria-label="Chatbot de preguntas frecuentes" aria-hidden="true">
+  <div id="asistente" class="floating-actions" aria-label="Preguntas frecuentes" data-i18n-attr="aria-label:bot.region">
+    <section id="chatPanel" class="floating-chat" aria-label="Prompty, asistente de preguntas frecuentes" aria-hidden="true" data-i18n-attr="aria-label:bot.panel">
       <div class="floating-chat-header">
         <div>
-          <span>P2P-BOT</span>
-          <strong>¡A tus órdenes!</strong>
+          <span>Prompty</span>
+          <strong data-i18n="bot.title">¡A tus órdenes!</strong>
         </div>
-        <button id="closeChat" class="icon-button" type="button" aria-label="Cerrar chatbot">x</button>
+        <button id="closeChat" class="icon-button" type="button" aria-label="Cerrar chat" data-i18n-attr="aria-label:bot.close">x</button>
       </div>
       <div id="chatMessages" class="chat-messages" aria-live="polite"></div>
       <div id="suggestedQuestions" class="question-list compact"></div>
       <form id="chatForm" class="chat-form">
-        <label class="sr-only" for="chatInput">Escribe tu pregunta</label>
-        <input id="chatInput" type="text" placeholder="Escribe para ver preguntas similares..." autocomplete="off">
+        <label class="sr-only" for="chatInput" data-i18n="bot.inputLabel">Escribe tu pregunta</label>
+        <input id="chatInput" type="text" placeholder="Escribe tu pregunta..." autocomplete="off" enterkeyhint="send" data-i18n-attr="placeholder:bot.placeholder">
+        <button class="chat-send" type="submit" aria-label="Enviar" data-i18n-attr="aria-label:bot.send">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12 20 4l-6 16-2.5-6.5z"></path></svg>
+        </button>
       </form>
+      <p class="chat-note" data-i18n="bot.note">Respuestas automáticas basadas en nuestras preguntas frecuentes.</p>
     </section>
 
     <div class="floating-controls">
-      <button id="chatToggle" class="chat-bubble" type="button" aria-label="Abrir chatbot" aria-expanded="false" aria-controls="chatPanel">
+      <button id="chatToggle" class="chat-bubble" type="button" aria-label="Abrir a Prompty" aria-expanded="false" aria-controls="chatPanel" data-i18n-attr="aria-label:bot.open">
         <img src="assets/Logos/chatbot-bot.png" alt="">
       </button>
     </div>
   </div>
 
+  <script src="i18n.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

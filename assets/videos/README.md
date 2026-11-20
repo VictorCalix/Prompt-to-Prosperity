@@ -1,18 +1,21 @@
 # Videos
 
-Coloca aqui el archivo del video. Aparece en el inicio como una miniatura en
-bucle y sin sonido debajo de la tarjeta del hero, y se abre en grande con audio
-al hacer clic.
-
-Para usar otro archivo, abre `script.js` y cambia los datos de `featuredVideo`:
+Coloca aqui los archivos de video. Se eligen por nombre en `script.js`:
 
 ```js
-const featuredVideo = {
-  filename: "video-temporal.mp4",
-  title: "Video informativo",
-  description: "Conoce Prompt to Prosperity"
+const videos = {
+  fondo: "video-temporal.mp4",
+  informativo: ""
 };
 ```
 
-Si el archivo no existe, la miniatura muestra "Disponible proximamente". Si
-`filename` queda vacio, no se muestra ningun espacio de video.
+- `fondo`: se reproduce sin sonido y en bucle detras de "Prompt to Prosperity"
+  en el inicio. Se pausa solo cuando la persona baja y el inicio ya no se ve.
+- `informativo`: mientras este vacio (`""`) no aparece nada. Al escribir el
+  nombre de un archivo de esta carpeta (por ejemplo `"video-informativo.mp4"`),
+  aparece en el inicio el boton "Ver video informativo", que lo abre en grande
+  con sonido.
+
+Opcional: reemplaza `assets/Programa/hero-poster.jpg` por un fotograma del video
+de fondo. Es la imagen que se ve mientras carga o si el navegador no reproduce
+videos automaticamente.

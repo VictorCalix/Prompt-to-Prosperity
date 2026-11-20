@@ -177,13 +177,14 @@ instrucciones operativas independientes.
 
 ### Aplicacion actual en la pagina de inicio
 
-- La marca institucional solo se aplica en `index.html`, en una unica franja
-  debajo del hero y sobre fondo blanco.
-- El orden de la franja es: bandera de Estados Unidos, sello de la Embajada,
-  Exchange Alumni y Freedom 250.
-- `Flag-strip.png` y `Freedom-250-strip.png` se derivan de `Flag.png` y
-  `Freedom 250.png`: solo se reescalaron y se quito el fondo o margen vacio,
-  sin alterar los logos.
+- La marca institucional solo se aplica en `index.html`, una sola vez, dentro
+  de la seccion "Alianza institucional", en una tarjeta de fondo blanco.
+- El orden de la fila oficial es: bandera de Estados Unidos, sello de la
+  Embajada y Exchange Alumni. Freedom 250 ya no se usa (pedido de Kat).
+- Los logos de socios (Banco Atlantida y ADH) van en una fila aparte, debajo,
+  rotulada "En alianza con" / "In partnership with".
+- `Flag-strip.png` se deriva de `Flag.png`: solo se reescalo y se quito el
+  margen vacio, sin alterar la bandera.
 - Los logos se insertan con `object-fit: contain`, sin recolorear, rotar,
   deformar, filtrar ni fusionar con otros elementos.
 - El aviso de financiamiento va una sola vez, debajo de la franja. No incluye

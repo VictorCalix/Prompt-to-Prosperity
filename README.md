@@ -9,11 +9,19 @@ gratuita, cupos limitados y acompanamiento de expertos.
 
 ## Archivos principales
 
-- `index.html`: estructura de la pagina.
+- `index.html`: estructura de la pagina (texto en espanol).
 - `styles.css`: estilos y paleta base.
-- `script.js`: logica del chatbot, tarjetas y configuracion del video destacado.
-- `faq.md`: preguntas, respuestas y palabras clave del chatbot.
-- `assets/videos/`: carpeta para videos. Consulta su `README.md` para mostrarlos por nombre.
+- `script.js`: logica de Prompty (chatbot), graficos de cifras, tarjetas del
+  curriculum, comunidad y video del inicio.
+- `i18n.js`: cambio de idioma ES / EN. El ingles se escribe aqui por clave
+  (`data-i18n="clave"` en el HTML). Se puede abrir la pagina en ingles con
+  `?lang=en`.
+- `faq.md` / `faq.en.md`: preguntas, respuestas y palabras clave de Prompty en
+  espanol e ingles.
+- `assets/videos/`: carpeta para videos. Consulta su `README.md`.
+- `assets/Programa/`: fotogramas del video usados como imagenes del programa.
+- `assets/Aliados/`: logos de aliados (Banco Atlantida y ADH). Si falta un
+  archivo, la seccion de alianzas muestra su nombre en su lugar.
 - `pages/miembros/`: paginas individuales para perfiles de miembros.
 - `pages/negocios/`: paginas individuales para perfiles de negocios.
 - `pages/directory.json`: indice generado automaticamente desde las paginas HTML.

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Comunidad | Prompt to Prosperity</title>
-  <meta name="description" content="Miembros y negocios participantes de Prompt to Prosperity.">
+  <title data-i18n="meta.communityTitle">Comunidad | Prompt to Prosperity</title>
+  <meta name="description" content="Miembros y negocios participantes de Prompt to Prosperity." data-i18n-attr="content:meta.communityDescription">
   <link rel="icon" type="image/png" href="assets/Logos/favicon-bot.png">
   <link rel="apple-touch-icon" href="assets/Logos/favicon-bot.png">
   <link rel="stylesheet" href="styles.css">
@@ -12,16 +12,20 @@
 <body class="community-page-body">
   <header class="site-header">
     <div class="header-identity">
-      <a class="brand" href="index.html#inicio" aria-label="Ir al inicio">
+      <a class="brand" href="index.html#inicio" aria-label="Ir al inicio" data-i18n-attr="aria-label:nav.home">
         <img class="brand-logo" src="assets/Logos/Logo%20Grande.png" alt="Prompt to Prosperity">
       </a>
+      <div class="lang-switch" role="group" aria-label="Idioma" data-i18n-attr="aria-label:lang.label">
+        <button type="button" data-lang="es" aria-pressed="true">ES</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
     </div>
 
-    <nav class="site-nav" aria-label="Navegación principal">
-      <a href="index.html#programa">Programa</a>
-      <a href="comunidad.html" aria-current="page">Comunidad</a>
-      <a href="index.html#sobre">Conócenos</a>
-      <a class="nav-pill" href="index.html#postulacion">¡Postúlate!</a>
+    <nav class="site-nav" aria-label="Navegación principal" data-i18n-attr="aria-label:nav.label">
+      <a href="index.html#programa" data-i18n="nav.program">Programa</a>
+      <a href="index.html#cifras" data-i18n="nav.stats">Cifras</a>
+      <a href="comunidad.html" aria-current="page" data-i18n="nav.community">Comunidad</a>
+      <a href="index.html#por-que" data-i18n="nav.about">Conócenos</a>
     </nav>
   </header>
 
@@ -37,41 +41,41 @@
               <path d="M16.7 3.2a4.1 4.1 0 0 1 0 7.9"></path>
             </svg>
           </span>
-          <h1>Miembros y negocios participantes</h1>
+          <h1 data-i18n="community.title">Miembros y negocios participantes</h1>
         </div>
       </div>
 
       <div class="directory-layout community-directory-layout">
         <section class="members-directory">
           <div class="directory-heading">
-            <h2>Miembros</h2>
+            <h2 data-i18n="community.members">Miembros</h2>
             <span id="memberCount">0</span>
           </div>
-          <div class="directory-scroll member-scroll" aria-label="Listado de miembros">
+          <div class="directory-scroll member-scroll" aria-label="Listado de miembros" data-i18n-attr="aria-label:community.membersList">
             <div id="membersGrid" class="card-grid member-grid"></div>
           </div>
         </section>
 
         <section class="businesses-directory">
           <div class="directory-heading">
-            <h2>Negocios</h2>
+            <h2 data-i18n="community.businesses">Negocios</h2>
             <span id="businessCount">0</span>
           </div>
 
-          <div class="business-filters" aria-label="Filtros de negocios">
+          <div class="business-filters" aria-label="Filtros de negocios" data-i18n-attr="aria-label:community.filters">
             <div class="filter-control">
-              <span id="generationFilterLabel">Generación</span>
+              <span id="generationFilterLabel" data-i18n="community.generation">Generación</span>
               <button id="generationFilter" class="filter-trigger" type="button" data-value="" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="generationFilterLabel generationFilter">Todas</button>
               <div id="generationFilterMenu" class="filter-menu" role="listbox" aria-labelledby="generationFilterLabel"></div>
             </div>
             <div class="filter-control">
-              <span id="categoryFilterLabel">Categoría</span>
+              <span id="categoryFilterLabel" data-i18n="community.category">Categoría</span>
               <button id="categoryFilter" class="filter-trigger" type="button" data-value="" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="categoryFilterLabel categoryFilter">Todas</button>
               <div id="categoryFilterMenu" class="filter-menu" role="listbox" aria-labelledby="categoryFilterLabel"></div>
             </div>
           </div>
 
-          <div class="directory-scroll business-scroll" aria-label="Listado de negocios">
+          <div class="directory-scroll business-scroll" aria-label="Listado de negocios" data-i18n-attr="aria-label:community.businessList">
             <div id="businessesGrid" class="card-grid business-grid"></div>
           </div>
         </section>
@@ -80,7 +84,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>Nuestras redes:</p>
+    <p data-i18n="footer.social">Nuestras redes:</p>
     <div class="footer-links">
       <a class="social-link social-instagram" href="https://www.instagram.com/prompttoprosperity/" target="_blank" rel="noopener" aria-label="Instagram de Prompt to Prosperity">
         <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.4" cy="6.7" r="1"></circle></svg>
@@ -109,30 +113,35 @@
     </div>
   </footer>
 
-  <div id="asistente" class="floating-actions" aria-label="Preguntas frecuentes">
-    <section id="chatPanel" class="floating-chat" aria-label="Chatbot de preguntas frecuentes" aria-hidden="true">
+  <div id="asistente" class="floating-actions" aria-label="Preguntas frecuentes" data-i18n-attr="aria-label:bot.region">
+    <section id="chatPanel" class="floating-chat" aria-label="Prompty, asistente de preguntas frecuentes" aria-hidden="true" data-i18n-attr="aria-label:bot.panel">
       <div class="floating-chat-header">
         <div>
-          <span>P2P-BOT</span>
-          <strong>¡A tus órdenes!</strong>
+          <span>Prompty</span>
+          <strong data-i18n="bot.title">¡A tus órdenes!</strong>
         </div>
-        <button id="closeChat" class="icon-button" type="button" aria-label="Cerrar chatbot">x</button>
+        <button id="closeChat" class="icon-button" type="button" aria-label="Cerrar chat" data-i18n-attr="aria-label:bot.close">x</button>
       </div>
       <div id="chatMessages" class="chat-messages" aria-live="polite"></div>
       <div id="suggestedQuestions" class="question-list compact"></div>
       <form id="chatForm" class="chat-form">
-        <label class="sr-only" for="chatInput">Escribe tu pregunta</label>
-        <input id="chatInput" type="text" placeholder="Escribe para ver preguntas similares..." autocomplete="off">
+        <label class="sr-only" for="chatInput" data-i18n="bot.inputLabel">Escribe tu pregunta</label>
+        <input id="chatInput" type="text" placeholder="Escribe tu pregunta..." autocomplete="off" enterkeyhint="send" data-i18n-attr="placeholder:bot.placeholder">
+        <button class="chat-send" type="submit" aria-label="Enviar" data-i18n-attr="aria-label:bot.send">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12 20 4l-6 16-2.5-6.5z"></path></svg>
+        </button>
       </form>
+      <p class="chat-note" data-i18n="bot.note">Respuestas automáticas basadas en nuestras preguntas frecuentes.</p>
     </section>
 
     <div class="floating-controls">
-      <button id="chatToggle" class="chat-bubble" type="button" aria-label="Abrir chatbot" aria-expanded="false" aria-controls="chatPanel">
+      <button id="chatToggle" class="chat-bubble" type="button" aria-label="Abrir a Prompty" aria-expanded="false" aria-controls="chatPanel" data-i18n-attr="aria-label:bot.open">
         <img src="assets/Logos/chatbot-bot.png" alt="">
       </button>
     </div>
   </div>
 
+  <script src="i18n.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
